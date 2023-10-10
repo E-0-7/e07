@@ -1,5 +1,6 @@
-# Proyek Tengah Semester
-## Pemrograman Berbasis Platform
+# Proyek Tengah Semester 
+## Membuat Situs Web menggunakan Framework Django
+# Pemrograman Berbasis Platform
 
 ## Nama-nama anggota kelompok
 - Ricky Setiawan
