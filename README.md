@@ -1,3 +1,6 @@
+# Proyek Tengah Semester
+## Pemrograman Berbasis Platform
+
 ## Nama-nama anggota kelompok
 - Ricky Setiawan
 - Caesar Justitio (2206082373)
