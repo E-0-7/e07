@@ -16,38 +16,65 @@ Dalam era digital saat ini, tantangan literasi bukan hanya sebatas aksesibilitas
 - #### Alur dari aplikasi
   ![./asset/bagan.png](./asset/bagan.png)
 
-## Daftar modul yang akan diimplementasikan
-- Katalog Buku
-  - GET : List dari Buku
-  - POST : Menambahkan Buku
-  - DELETE : Menghapus buku
-- Beli Buku
-  - GET :
-  - POST :
-  - DELETE : 
-- Pinjam Buku
-  - GET :
-  - POST :
-  - DELETE :
-- Request Buku
-  - GET :
-  - POST :
-  - DELETE :
-- Donasi Buku
-  - GET :
-  - POST :
-  - DELETE :
+
+## Daftar modul yang akan diimplementasikan  
+| Modul          | Deskripsi                                                                                                                                                                      |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Katalog Buku:** |                                                                                                                                                                                |
+| **GET:**        | Melihat daftar buku                                                                                                                                                           |
+|                | - Daftar buku berdasarkan kategori (fiksi, non-fiksi, sastra, sains, dll.)                                                                                                    |
+|                | - Pencarian buku berdasarkan judul, penulis, ISBN, atau kata kunci                                                                                                             |
+|                | - Detail buku yang mencakup sinopsis, informasi penulis, tanggal terbit, dan ulasan pengguna                                                                                  |
+| **POST:**       | Menambahkan buku baru ke dalam katalog                                                                                                                                         |
+|                | - Formulir untuk memasukkan data buku baru, termasuk judul, penulis, ISBN, sinopsis, kategori, dan lain-lain                                                                |
+| **DELETE:**     | Menghapus buku dari katalog                                                                                                                                                   |
+|                | - Menghapus entri buku berdasarkan ID buku atau judul buku                                                                                                                     |
+| **Beli Buku:**    |                                                                                                                                                                                |
+| **GET:**        | Melihat list buku yang tersedia untuk dibeli                                                                                                                                   |
+|                | - Daftar buku dengan harga, ketersediaan stok, dan informasi lainnya                                                                                                            |
+|                | - Detail buku termasuk ulasan dari pembeli sebelumnya                                                                                                                          |
+| **POST:**       | Proses pembelian buku                                                                                                                                                         |
+|                | - Formulir pembelian yang mencakup data pembeli, alamat pengiriman, metode pembayaran, dan lain-lain                                                                         |
+| **DELETE:**     | Membatalkan pesanan buku                                                                                                                                                     |
+|                | - Membatalkan pesanan yang belum dikirim berdasarkan nomor pesanan                                                                                                             |
+| **Pinjam Buku:**  |                                                                                                                                                                                |
+| **GET:**        | Melihat list buku yang tersedia untuk dipinjam                                                                                                                                |
+|                | - Daftar buku dengan informasi status ketersediaan untuk peminjaman                                                                                                            |
+| **POST:**       | Proses peminjaman buku                                                                                                                                                       |
+|                | - Formulir peminjaman yang mencakup data peminjam, tanggal pengembalian, dan lain-lain                                                                                         |
+| **DELETE:**     | Mengembalikan buku yang dipinjam                                                                                                                                              |
+|                | - Proses pengembalian buku dan mengupdate status ketersediaan buku                                                                                                             |
+| **Request Buku:** |                                                                                                                                                                                |
+| **GET:**        | Melihat daftar buku yang telah diminta oleh pengguna lain                                                                                                                     |
+|                | - Daftar permintaan buku beserta statusnya (mis. pending, diterima, ditolak)                                                                                                   |
+| **POST:**       | Membuat permintaan buku baru                                                                                                                                                  |
+|                | - Formulir untuk memasukkan data buku yang diinginkan                                                                                                                          |
+| **DELETE:**     | Membatalkan permintaan buku                                                                                                                                                  |
+|                | - Membatalkan permintaan berdasarkan ID permintaan atau judul buku                                                                                                             |
+| **Donasi Buku:** |                                                                                                                                                                                |
+| **GET:**        | Melihat daftar buku yang didonasikan oleh pengguna lain                                                                                                                       |
+|                | - Daftar buku yang tersedia untuk didonasikan beserta kondisi dan detailnya                                                                                                    |
+| **POST:**       | Menambahkan buku untuk didonasikan                                                                                                                                           |
+|                | - Formulir untuk memasukkan data buku yang ingin didonasikan, termasuk kondisi buku dan lain-lain                                                                            |
+| **DELETE:**     | Menghapus buku dari daftar donasi                                                                                                                                              |
+|                | - Menghapus entri buku yang didonasikan berdasarkan ID buku atau judul buku                                                                                                     |
 
 ## Sumber dataset katalog buku
-https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset 
+    |- https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset 
+      |- Books.csv
 
 ## Role atau peran pengguna beserta deskripsinya (karena bisa saja lebih dari satu jenis pengguna yang mengakses aplikasi)
-- Pengguna non-login:
-Hanya bisa mengakses katalog buku
+- Pengguna Non-Login:
+Pengguna non-login adalah mereka yang mengunjungi aplikasi perpustakaan tanpa masuk atau membuat akun. Mereka memiliki akses terbatas hanya untuk melihat katalog buku yang tersedia dalam perpustakaan. Mereka tidak dapat menggunakan fitur-fitur lainnya.
 
-- Pengguna login:
-Bisa mengakses katalog buku dan menggunakan semua fetures
-
+- Pengguna Login:
+Pengguna login adalah individu yang telah membuat akun dan masuk ke dalam aplikasi perpustakaan. Mereka memiliki akses penuh ke seluruh fitur-fitur aplikasi, termasuk:
+  * Melihat Katalog Buku
+  * Membeli Buku
+  * Meminjam Buku
+  * Merequest Buku
+  * Mendonasikan Buku.
+  
 - Pustakawan:
-Bisa mengakses katalog buku dan menggunakan semua fetures serta menambah buku baru
+Pustakawan adalah petugas perpustakaan yang memiliki hak akses penuh ke dalam aplikasi "Flex-lib". Mereka memiliki akses penuh ke seluruh fitur-fitur aplikasi serta memiliki tanggung jawab tambahan, untuk menambahkan buku baru.
 
