@@ -1,6 +1,6 @@
 # Proyek Tengah Semester 
 ## Membuat Situs Web menggunakan Framework Django
-# Pemrograman Berbasis Platform
+## Pemrograman Berbasis Platform
 
 ## Nama-nama anggota kelompok
 - Ricky Setiawan
@@ -18,10 +18,25 @@ Dalam era digital saat ini, tantangan literasi bukan hanya sebatas aksesibilitas
 
 ## Daftar modul yang akan diimplementasikan
 - Katalog Buku
+  - GET : List dari Buku
+  - POST : Menambahkan Buku
+  - DELETE : Menghapus buku
 - Beli Buku
+  - GET :
+  - POST :
+  - DELETE : 
 - Pinjam Buku
+  - GET :
+  - POST :
+  - DELETE :
 - Request Buku
+  - GET :
+  - POST :
+  - DELETE :
 - Donasi Buku
+  - GET :
+  - POST :
+  - DELETE :
 
 ## Sumber dataset katalog buku
 https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset 
