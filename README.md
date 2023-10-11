@@ -5,7 +5,7 @@
 ## Nama-nama anggota kelompok
 - Ricky Setiawan
 - Caesar Justitio (2206082373)
-- Devin Faiz Faturahman
+- Devin Faiz Faturahman (2206830593)
 - Bimantoro Widyadana
 - Thirza Ahmad Tsaqif (2206082556)
 
