@@ -35,9 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'main',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
     'request_buku',
 ]
 
