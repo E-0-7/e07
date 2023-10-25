@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'main',
     'request_buku',
     'donasi_buku',
-    'register'
+    'register',
+    'katalog_buku',
 ]
 
 MIDDLEWARE = [
