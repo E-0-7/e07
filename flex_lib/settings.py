@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'request_buku',
+    'katalog_buku',
 ]
 
 MIDDLEWARE = [
