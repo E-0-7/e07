@@ -1,13 +1,9 @@
-{% extends header.html %}
+{% extends 'header.html' %}
 
 {% load static %}
 
-
-<body> 
-    {% block content %}
-    {% endblock %}
-
-    {% include footer.html %}
-</body>
+{% block content %}
+{% include 'footer.html' %}
+{% endblock %}
 
 
