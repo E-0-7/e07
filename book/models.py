@@ -7,4 +7,4 @@ class Books(models.Model):
     Book_Author = models.CharField(max_length=255);
     Year_Publication = models.IntegerField();
     Publisher = models.CharField(max_length=255);
-    Book_Cover = "http://images.amazon.com/images/P/0195153448.01.MZZZZZZZ.jpg",
+    Book_Cover = models.CharField(max_length=255),
