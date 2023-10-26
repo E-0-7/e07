@@ -6,9 +6,11 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core import serializers
+import json
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt 
-from datetime import date
+from datetime import date, datetime
+from django.forms.models import model_to_dict
 
 # Create your views here.
 def status_request_buku(request):
@@ -62,15 +64,50 @@ def login_user(request):
     return render(request, 'login.html', context)
 
 def json_format(request):
-    data = StatusRequest.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    user = request.user
+    status_requests = StatusRequest.objects.all()
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        
+        
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
 
 def get_request_data(request):
     user = request.user
-    status_request = StatusRequest.objects.filter(buku__user=user)
+    status_requests = StatusRequest.objects.filter(buku__user=user)
     
-    data = serializers.serialize('json', status_request)
-    return HttpResponse(data, content_type='application/json')
+    
+    # data = serializers.serialize('json', status_request)
+    
+    # return HttpResponse(data, content_type='application/json')
+
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
 
 @csrf_exempt
 def add_request_buku_ajax(request):
