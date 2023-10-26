@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core import serializers
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt 
+from datetime import date
 
 # Create your views here.
 def status_request_buku(request):
@@ -58,3 +60,31 @@ def login_user(request):
             messages.info(request, 'Username atau password salah')
     context = {}
     return render(request, 'login.html', context)
+
+def json_format(request):
+    data = StatusRequest.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def get_request_data(request):
+    user = request.user
+    status_request = StatusRequest.objects.filter(buku__user=user)
+    
+    data = serializers.serialize('json', status_request)
+    return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
+def add_request_buku_ajax(request):
+    if request.method == "POST":
+        user = request.user
+        judul_buku = request.POST.get('judul_buku')
+        author = request.POST.get('author')
+        tahun_publikasi = request.POST.get('tahun_publikasi')
+        isi_buku = request.POST.get('isi_buku')
+        
+        request_buku_data = RequestBuku(user=user, judul_buku=judul_buku, author=author, tahun_publikasi=tahun_publikasi, isi_buku=isi_buku, tanggal_request=date.today())
+        request_buku_data.save()
+        status_buku = StatusRequest(buku=request_buku_data, status='PENDING')
+        status_buku.save()
+
+        return HttpResponse("Created", status=201)
+    return HttpResponse("Not Created", status=400)

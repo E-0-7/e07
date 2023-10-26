@@ -296,8 +296,67 @@
         </div>
         {% endfor %}
 
+        <div id="item_view">
+            
+        </div>
+
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Minta Request Buku</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return false;">
+                            {% csrf_token %}
+                            <div class="mb-3" style="margin-bottom: 22px;">
+                                <label class="col-form-label">
+                                    Judul Buku
+                                </label>
+                                <div style="display:block">
+                                    <input type="text" class="form-control" id="judul_buku" name="judul_buku" placeholder="Judul Buku"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="col-1form-label">
+                                    Penulis Buku
+                                </label>
+                                <div style="display:block">
+                                    <textarea type="text" class="form-control" id="isi_buku" name="isi_buku"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="col-1form-label">
+                                    Penulis Buku
+                                </label>
+                                <div style="display:block">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="Penulis Buku"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="form-label">
+                                    Tahun Publikasi
+                                </label>
+                                <div style="display:block">
+                                    <input type="number" class="form-control" id="tahun_publikasi" name="tahun_publikasi" placeholder="Tahun Publikasi"></input>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Tambah Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
         <div class="col" style="text-align: center;">
             <button class="btn btn-primary btn-lg me-2" id="button_request" type="button" style="text-align: center;">Request Buku Sekarang</button>
+            <button type="button" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#requestModal">Add Item by AJAX</button>
         </div>
 
         <footer>
@@ -349,6 +408,76 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            async function getRequestBuku() {
+                return fetch("{% url 'request_buku:get_request_data' %}").then((res) => res.json())
+            }
+
+            async function refreshRequest() {
+                document.getElementById("item_view").innerHTML = ""
+                const requestBuku = await getRequestBuku()
+                let htmlString = ""
+                requestBuku.forEach((request) => {
+                    htmlString += `<div id="main_list" class="row">
+                        <div id="icon_div" >
+                            <div id="icon_background" >
+                               <img id="book_logo" src={% static 'css/asset/icon.png' %} alt="logo buku">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="judul_buku">
+                                            <p  class="status" style="display: inline-flex;">${ request.fields.buku.judul_buku }</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="author_buku">
+                                            <p  class="info_buku" style="display: inline-flex;">Author: ${ request.fields.buku.author }</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p  class="info_buku" style="text-align: center; display: inline-flex;">Tahun: ${ request.fields.buku.tahun_publikasi }</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="text-align: center;">
+                            <div style="text-align: center;">
+                                <p  class="info_buku" style="text-align: center; display: inline-flex;">Tanggal request: ${ request.fields.buku.tanggal_request }</p>
+                            </div>
+                        </div>
+                        <div class="col" id="tempat_status">
+                            <div id="${ request.fields.status }_button">
+                                <p class="status" id="${ request.fields.status }_text">${ request.fields.status }</p>
+                            </div>
+                        </div>
+                    </div>`
+                })
+
+                document.getElementById("item_view").innerHTML = htmlString
+            }
+
+            async function addRequestBuku() {
+                fetch("{% url 'request_buku:add_request_buku_ajax' %}", {
+                    method: "POST",
+                    body: new FormData(document.getElementById("form")),
+                }).then(refreshRequest);
+
+                document.getElementById("form").reset();
+                return false;
+            }
+
+            document.getElementById("button_add").onclick = addRequestBuku
+
+            refreshRequest()
+        </script>
     </body>
 </html>
 
