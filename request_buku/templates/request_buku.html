@@ -165,8 +165,7 @@
                             <div style="max-width: 350px;">
                                 <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Request Buku</h1>
                                 <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
-                                <a class="btn btn-primary btn-lg me-2" role="button" href="{% url 'request_buku:add_request_buku' %}">Request Buku Sekarang</a>
-                                <a class="btn btn-outline-primary btn-lg" role="button" href="#">Button</a>
+                                <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -202,7 +201,7 @@
                 <div class="d-none d-md-block">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item text-center">
-                            <a class="btn btn-primary btn-lg me-2" role="button" href="#">Request Buku Sekarang</a>
+                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
                         </li>
                     </ul>
                     
@@ -278,7 +277,7 @@
                             </div>
                             <div class="mb-3" style="margin-bottom: 24px;">
                                 <label class="col-1form-label">
-                                    Penulis Buku
+                                    Isi Buku (Secara Garis Besar)
                                 </label>
                                 <div style="display:block">
                                     <textarea type="text" class="form-control" id="isi_buku" name="isi_buku"></textarea>
@@ -310,11 +309,8 @@
             </div>
         </div>
 
-        
-
         <div class="col" style="text-align: center;">
-            <button class="btn btn-primary btn-lg me-2" id="button_request" type="button" style="text-align: center;">Request Buku Sekarang</button>
-            <button type="button" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#requestModal">Add Item by AJAX</button>
+            <button type="button" class="btn btn-primary btn-lg me-2" id="button_request" style="text-align: center;" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</button>
         </div>
 
         <script>
@@ -322,6 +318,11 @@
                 return fetch("{% url 'request_buku:get_request_data' %}").then((res) => res.json())
             }
 
+            async function getFilterBukuByJudul() {
+                return fetch("{% url 'request_buku:filter_data_by_judul_buku' %}").then((res) => res.json())
+            }
+
+            
             async function refreshRequest() {
                 document.getElementById("item_view").innerHTML = ""
                 const requestBuku = await getRequestBuku()
@@ -362,6 +363,9 @@
                             </div>
                         </div>
                         <div class="col" id="tempat_status">
+                            <div id="DITOLAK_button">
+                                <p onClick="deleteRequestBuku(${ request.id })" class="status" id="DITOLAK_text">Hapus</p>
+                            </div>
                             <div id="${ request.status }_button">
                                 <p class="status" id="${ request.status }_text">${ request.status }</p>
                             </div>
@@ -380,6 +384,12 @@
 
                 document.getElementById("form").reset();
                 return false;
+            }
+
+            async function deleteRequestBuku(id) {
+                await fetch(`/delete_request_buku/${id}`, {
+                    method: "DELETE",
+                }).then(refreshRequest);
             }
 
             document.getElementById("button_add").onclick = addRequestBuku
