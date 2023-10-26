@@ -1,3 +1,5 @@
+
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -17,10 +19,8 @@
 <body>
     {% include 'header.html' %}
 
-    {% block content %}
-    {% endblock content %}
-
-    {% include 'footer.html' %}
-</body>
+{% block content %}
+{% include 'footer.html' %}
+{% endblock %}
 
 
