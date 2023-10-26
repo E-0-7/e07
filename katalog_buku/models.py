@@ -7,3 +7,6 @@ class Buku(models.Model):
     penulis = models.CharField(max_length=255)
     tahun_terbit = models.IntegerField()
     jumlah = models.IntegerField()
+
+    def __str__(self):
+        return self.judul
