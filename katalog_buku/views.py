@@ -7,3 +7,6 @@ from .models import Buku
 def get_books(request):
     data = Buku.objects.all()
     return HttpResponse(serializers.serialize('json', data), content_type='application/json')
+
+
+
