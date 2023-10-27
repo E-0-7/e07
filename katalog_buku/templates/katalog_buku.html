@@ -96,7 +96,7 @@
     <div class="main-container">
         {% for b in buku %}
         <div class="card-container">
-            <img src="url({{b.image}})">
+            <img src="{{b.image}}">
             <div class="card-detail">
                 <div class="title">
                     <p>{{b.book_title}}</p>
@@ -126,7 +126,7 @@
             const cardContainer = document.createElement("div");
             cardContainer.className = "card-container";
             cardContainer.innerHTML = `
-                <img src="url(${buku.fields.url_foto_large})"">
+                <img src="${buku.fields.url_foto_large}"">
             `;
 
             const cardDetail = document.createElement("div");
