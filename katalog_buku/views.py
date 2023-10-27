@@ -8,5 +8,8 @@ def get_books(request):
     data = Buku.objects.all()
     return HttpResponse(serializers.serialize('json', data), content_type='application/json')
 
-
+def get(request):
+    all_product = Buku.objects.all()
+    context = {'buku':all_product}
+    return render(request,'katalog_buku.html', context)
 
