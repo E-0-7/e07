@@ -6,50 +6,59 @@
 
 {% block content %}
 <div class="container">
-    <div class="row d-flex my-3">
+    <div class="row my-3">
         <h1 style="text-align: center;">Donation Form</h1>
     </div>
     <div class="row my-3">
-        <span class="border border-light border-5 p-4">
-            {% csrf_token %}
+        <hr>
+    </div>
+    <div class="row my-3">
+        <span class="border border-light border-5 p-4 shadow-lg">
             <form method="post">
+                {% csrf_token %}
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="author" class="col-sm-2 col-form-label">Author</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="author" name="author" required>
+                        <input type="text" class="form-control" id="author" name="author" placeholder="Author" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="year" class="col-sm-2 col-form-label">Release Year</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" id="year" name="year" required>
+                        <input type="number" class="form-control" id="year" name="year" placeholder="Year" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="edition" class="col-sm-2 col-form-label">Edition</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" id="number" name="number" required>
+                        <input type="number" class="form-control" id="edition" name="edition" placeholder="Edition" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="amount" class="col-sm-2 col-form-label">Jumlah Donasi</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="amount" name="amount" placeholder="Jumlah" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="imageUrl" class="col-sm-2 col-form-label">Image URL (optional)</label>
-                    <div class="col-sm-2">
-                        <input type="url" class="form-control" id="imageUrl" name="imageUrl">
+                    <div class="col-sm-10">
+                        <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="https://www.yourimage.com/image.jpg">
                     </div>
                 </div>
-                <div class="row justify-content-center">
+                <div class="row float-end">
                     <div class="col">
                         <button type="submit" class="btn btn-primary">Donate</button>
                     </div>
