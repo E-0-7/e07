@@ -1,0 +1,404 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+        <title>Request Buku</title>
+        
+        <style>
+            .status {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-bottom: 0px;
+            }  
+
+            .info_buku {
+                color: #000;
+                font-family: Montserrat;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin-bottom: 0px;
+            }
+
+            #main_list {
+                background: #EDEDED;
+                align-items: center;
+                padding-top: 20px; 
+                padding-bottom: 20px;
+                padding-right: 20px;
+                padding-left: 20px;
+                margin-right: 25px;
+                margin-left: 25px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                border-radius: 15px;
+                flex-shrink: 0;
+                box-shadow: 6px 8px 4px 0px rgba(0, 0, 0, 0.25);
+            }
+
+            #icon_div {
+                text-align: left;     
+                width: 127px;
+                height: 102px;
+                border-radius: 10px;
+                background: #9BD4E4;
+            }
+
+            #tempat_status {
+                text-align: right;
+            }
+
+            #PENDING_button {
+                align-items: center;
+                justify-content: center;
+                background: #FFD699;
+                display: inline-block;
+                margin-right: 24px;
+                border-radius: 10px;
+            }
+
+            #PENDING_text {
+                color: #E27A00;
+                font-family: Montserrat;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-bottom: 0px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-right: 20px;
+                padding-left: 20px;
+                display: inline-block;
+            }
+
+            #DITERIMA_button {
+                align-items: center;
+                justify-content: center;
+                background: #BAF8BC;
+                display: inline-block;
+                margin-right: 24px;
+                border-radius: 10px;
+            }
+
+
+            #DITERIMA_text {
+                color: #046F1C;
+                font-family: Montserrat;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-bottom: 0px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-right: 20px;
+                padding-left: 20px;
+                display: inline-block;
+            }
+
+            #DITOLAK_button {
+                align-items: center;
+                justify-content: center;
+                background: #FFBABA;
+                display: inline-block;
+                margin-right: 24px;
+                border-radius: 10px;
+            }
+
+
+            #DITOLAK_text {
+                color: #A70000;
+                font-family: Montserrat;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-bottom: 0px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-right: 20px;
+                padding-left: 20px;
+                display: inline-block;
+            }
+
+            #button_request {
+                width: 90%;
+                margin-top: 20px;
+                margin-right: 24px;
+                margin-left: 25px;
+            }
+
+            #icon_background {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #book_logo {
+                width: 70%;
+                height: 70%;
+            }
+           
+        </style>
+        
+        
+    
+    <body>
+        <section>
+            <div style="opacity: 1; height: 600px;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                            <div style="max-width: 350px;">
+                                <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Request Buku</h1>
+                                <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
+                                <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
+            <div class="container-fluid">
+                
+            <a class="navbar-brand" style="margin-left:30px;" href="#">Request Buku</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse container justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Filter</a>
+                </li>
+                <li class="nav-item">
+                    <select name="filter" id="filter">
+                        <option value="" selected="">---------</option>
+                        <option value="status">Status</option>
+                        <option value="tanggal_request">Tanggal Request</option>
+                    </select>
+                </li>
+                <li class="nav-item" style="margin-left: 20px">
+                    <form method="get">
+                        <input type="text" name="search" id="search" placeholder="Search" />
+                    </form>
+                </li>
+                </ul>
+                <div class="d-none d-md-block">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item text-center">
+                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+            </div>
+        </nav>
+
+        {% for request in status_request %}
+        <div id="main_list" class="row">
+            <div id="icon_div" >
+                <div id="icon_background" >
+                   <img id="book_logo" src={% static 'css/asset/icon.png' %} alt="logo buku">
+                </div>
+            </div>
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="judul_buku">
+                                <p  class="status" style="display: inline-flex;">{{ request.buku.judul_buku }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="author_buku">
+                                <p  class="info_buku" style="display: inline-flex;">Author: {{ request.buku.author }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p  class="info_buku" style="text-align: center; display: inline-flex;">Tahun: {{ request.buku.tahun_publikasi }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="text-align: center;">
+                <div style="text-align: center;">
+                    <p  class="info_buku" style="text-align: center; display: inline-flex;">Tanggal request: {{ request.buku.tanggal_request }}</p>
+                </div>
+            </div>
+            <div class="col" id="tempat_status">
+                <div id="{{ request.status }}_button">
+                    <p class="status" id="{{ request.status }}_text">{{ request.status }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div id="item_view">
+            
+        </div>
+
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Minta Request Buku</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return false;">
+                            {% csrf_token %}
+                            <div class="mb-3" style="margin-bottom: 22px;">
+                                <label class="col-form-label">
+                                    Judul Buku
+                                </label>
+                                <div style="display:block">
+                                    <input type="text" class="form-control" id="judul_buku" name="judul_buku" placeholder="Judul Buku"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="col-1form-label">
+                                    Isi Buku (Secara Garis Besar)
+                                </label>
+                                <div style="display:block">
+                                    <textarea type="text" class="form-control" id="isi_buku" name="isi_buku"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="col-1form-label">
+                                    Penulis Buku
+                                </label>
+                                <div style="display:block">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="Penulis Buku"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="form-label">
+                                    Tahun Publikasi
+                                </label>
+                                <div style="display:block">
+                                    <input type="number" class="form-control" id="tahun_publikasi" name="tahun_publikasi" placeholder="Tahun Publikasi"></input>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Tambah Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" style="text-align: center;">
+            <button type="button" class="btn btn-primary btn-lg me-2" id="button_request" style="text-align: center;" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</button>
+        </div>
+
+        <script>
+            async function getRequestBuku() {
+                return fetch("{% url 'request_buku:get_request_data' %}").then((res) => res.json())
+            }
+
+            async function getFilterBukuByJudul() {
+                return fetch("{% url 'request_buku:filter_data_by_judul_buku' %}").then((res) => res.json())
+            }
+
+            
+            async function refreshRequest() {
+                document.getElementById("item_view").innerHTML = ""
+                const requestBuku = await getRequestBuku()
+                let htmlString = ""
+                requestBuku.forEach((request) => {
+                    htmlString += `<div id="main_list" class="row">
+                        <div id="icon_div" >
+                            <div id="icon_background" >
+                               <img id="book_logo" src={% static 'css/asset/icon.png' %} alt="logo buku">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="judul_buku">
+                                            <p  class="status" style="display: inline-flex;">${ request.judul_buku }</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="author_buku">
+                                            <p  class="info_buku" style="display: inline-flex;">Author: ${ request.author }</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p  class="info_buku" style="text-align: center; display: inline-flex;">Tahun: ${ request.tahun_publikasi }</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="text-align: center;">
+                            <div style="text-align: center;">
+                                <p  class="info_buku" style="text-align: center; display: inline-flex;">Tanggal request: ${ request.tanggal_request }</p>
+                            </div>
+                        </div>
+                        <div class="col" id="tempat_status">
+                            <div id="DITOLAK_button">
+                                <p onClick="deleteRequestBuku(${ request.id })" class="status" id="DITOLAK_text">Hapus</p>
+                            </div>
+                            <div id="${ request.status }_button">
+                                <p class="status" id="${ request.status }_text">${ request.status }</p>
+                            </div>
+                        </div>
+                    </div>`
+                })
+
+                document.getElementById("item_view").innerHTML = htmlString
+            }
+
+            async function addRequestBuku() {
+                fetch("{% url 'request_buku:add_request_buku_ajax' %}", {
+                    method: "POST",
+                    body: new FormData(document.getElementById("form")),
+                }).then(refreshRequest);
+
+                document.getElementById("form").reset();
+                return false;
+            }
+
+            async function deleteRequestBuku(id) {
+                await fetch(`/delete_request_buku/${id}`, {
+                    method: "DELETE",
+                }).then(refreshRequest);
+            }
+
+            document.getElementById("button_add").onclick = addRequestBuku
+
+            refreshRequest()
+        </script>
+    </body>
+</html>
+
+{% endblock content %}
+
+
