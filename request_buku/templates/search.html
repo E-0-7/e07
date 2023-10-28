@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel = "stylesheet" type = "text/css" href = "{% static 'css/request_buku.css' %}">
+    <h1>Search Result</h1>
+    {% if status_requests %}
+            {% for request in status_requests %}
+            <div id="main_list" class="row">
+                <div id="icon_div" >
+                    <div id="icon_background" >
+                       <img id="book_logo" src={% static 'css/asset/icon.png' %} alt="logo buku">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="judul_buku">
+                                    <p  class="status" style="display: inline-flex;">{{ request.buku.judul_buku }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="author_buku">
+                                    <p  class="info_buku" style="display: inline-flex;">Author: {{ request.buku.author }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p  class="info_buku" style="text-align: center; display: inline-flex;">Tahun: {{ request.buku.tahun_publikasi }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" style="text-align: center;">
+                    <div style="text-align: center;">
+                        <p  class="info_buku" style="text-align: center; display: inline-flex;">Tanggal request: {{ request.buku.tanggal_request }}</p>
+                    </div>
+                </div>
+                <div class="col" id="tempat_status">
+                    <div id="DITOLAK_button">
+                        <p onClick="deleteRequestBuku(${ request.id })" class="status" id="DITOLAK_text">Hapus</p>
+                    </div>
+                    <div id="{{ request.status }}_button">
+                        <p class="status" id="{{ request.status }}_text">${{ request.status }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    {% else %}
+        <p>No results found</p>
+    {% endif %}
+{% endblock content %}

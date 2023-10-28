@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-# from katalog_buku.views import katalog_buku_view
+from katalog_buku.views import get
 from request_buku.views import status_request_buku
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm
@@ -19,7 +19,7 @@ def login_user(request):
         user = authenticate(request=request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('request_buku:status_request_buku')
+            return redirect('katalog_buku:get')
         else:
             messages.info(request, 'Username atau password salah')
     context = {}
