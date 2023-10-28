@@ -1,0 +1,1202 @@
+[
+  {
+    "pk": 1,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0195153448",
+      "Book_Title": "Classical Mythology",
+      "Book_Author": "Mark P. O. Morford",
+      "Years_Publication": 2002,
+      "Publisher": "Oxford University Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0195153448.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0002005018",
+      "Book_Title": "Clara Callan",
+      "Book_Author": "Richard Bruce Wright",
+      "Years_Publication": 2001,
+      "Publisher": "HarperFlamingo Canada",
+      "Book_Cover": "http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0060973129",
+      "Book_Title": "Decision in Normandy",
+      "Book_Author": "Carlo D'Este",
+      "Years_Publication": 1991,
+      "Publisher": "HarperPerennial",
+      "Book_Cover": "http://images.amazon.com/images/P/0060973129.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0374157065",
+      "Book_Title": "Flu: The Story of the Great Influenza Pandemic of 1918 and the Search for the Virus That Caused It",
+      "Book_Author": "Gina Bari Kolata",
+      "Years_Publication": 1999,
+      "Publisher": "Farrar Straus Giroux",
+      "Book_Cover": "http://images.amazon.com/images/P/0374157065.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0393045218",
+      "Book_Title": "The Mummies of Urumchi",
+      "Book_Author": "E. J. W. Barber",
+      "Years_Publication": 1999,
+      "Publisher": "W. W. Norton &amp; Company",
+      "Book_Cover": "http://images.amazon.com/images/P/0393045218.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0399135782",
+      "Book_Title": "The Kitchen God's Wife",
+      "Book_Author": "Amy Tan",
+      "Years_Publication": 1991,
+      "Publisher": "Putnam Pub Group",
+      "Book_Cover": "http://images.amazon.com/images/P/0399135782.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0425176428",
+      "Book_Title": "What If?: The World's Foremost Military Historians Imagine What Might Have Been",
+      "Book_Author": "Robert Cowley",
+      "Years_Publication": 2000,
+      "Publisher": "Berkley Publishing Group",
+      "Book_Cover": "http://images.amazon.com/images/P/0425176428.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0671870432",
+      "Book_Title": "PLEADING GUILTY",
+      "Book_Author": "Scott Turow",
+      "Years_Publication": 1993,
+      "Publisher": "Audioworks",
+      "Book_Cover": "http://images.amazon.com/images/P/0671870432.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0679425608",
+      "Book_Title": "Under the Black Flag: The Romance and the Reality of Life Among the Pirates",
+      "Book_Author": "David Cordingly",
+      "Years_Publication": 1996,
+      "Publisher": "Random House",
+      "Book_Cover": "http://images.amazon.com/images/P/0679425608.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "074322678X",
+      "Book_Title": "Where You'll Find Me: And Other Stories",
+      "Book_Author": "Ann Beattie",
+      "Years_Publication": 2002,
+      "Publisher": "Scribner",
+      "Book_Cover": "http://images.amazon.com/images/P/074322678X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0771074670",
+      "Book_Title": "Nights Below Station Street",
+      "Book_Author": "David Adams Richards",
+      "Years_Publication": 1988,
+      "Publisher": "Emblem Editions",
+      "Book_Cover": "http://images.amazon.com/images/P/0771074670.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "080652121X",
+      "Book_Title": "Hitler's Secret Bankers: The Myth of Swiss Neutrality During the Holocaust",
+      "Book_Author": "Adam Lebor",
+      "Years_Publication": 2000,
+      "Publisher": "Citadel Press",
+      "Book_Cover": "http://images.amazon.com/images/P/080652121X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0887841740",
+      "Book_Title": "The Middle Stories",
+      "Book_Author": "Sheila Heti",
+      "Years_Publication": 2004,
+      "Publisher": "House of Anansi Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0887841740.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1552041778,
+      "Book_Title": "Jane Doe",
+      "Book_Author": "R. J. Kaiser",
+      "Years_Publication": 1999,
+      "Publisher": "Mira Books",
+      "Book_Cover": "http://images.amazon.com/images/P/1552041778.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1558746218,
+      "Book_Title": "A Second Chicken Soup for the Woman's Soul (Chicken Soup for the Soul Series)",
+      "Book_Author": "Jack Canfield",
+      "Years_Publication": 1998,
+      "Publisher": "Health Communications",
+      "Book_Cover": "http://images.amazon.com/images/P/1558746218.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1567407781,
+      "Book_Title": "The Witchfinder (Amos Walker Mystery Series)",
+      "Book_Author": "Loren D. Estleman",
+      "Years_Publication": 1998,
+      "Publisher": "Brilliance Audio - Trade",
+      "Book_Cover": "http://images.amazon.com/images/P/1567407781.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1575663937,
+      "Book_Title": "More Cunning Than Man: A Social History of Rats and Man",
+      "Book_Author": "Robert Hendrickson",
+      "Years_Publication": 1999,
+      "Publisher": "Kensington Publishing Corp.",
+      "Book_Cover": "http://images.amazon.com/images/P/1575663937.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1881320189,
+      "Book_Title": "Goodbye to the Buttermilk Sky",
+      "Book_Author": "Julia Oliver",
+      "Years_Publication": 1994,
+      "Publisher": "River City Pub",
+      "Book_Cover": "http://images.amazon.com/images/P/1881320189.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0440234743",
+      "Book_Title": "The Testament",
+      "Book_Author": "John Grisham",
+      "Years_Publication": 1999,
+      "Publisher": "Dell",
+      "Book_Cover": "http://images.amazon.com/images/P/0440234743.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0452264464",
+      "Book_Title": "Beloved (Plume Contemporary Fiction)",
+      "Book_Author": "Toni Morrison",
+      "Years_Publication": 1994,
+      "Publisher": "Plume",
+      "Book_Cover": "http://images.amazon.com/images/P/0452264464.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0609804618",
+      "Book_Title": "Our Dumb Century: The Onion Presents 100 Years of Headlines from America's Finest News Source",
+      "Book_Author": "The Onion",
+      "Years_Publication": 1999,
+      "Publisher": "Three Rivers Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0609804618.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1841721522,
+      "Book_Title": "New Vegetarian: Bold and Beautiful Recipes for Every Occasion",
+      "Book_Author": "Celia Brooks Brown",
+      "Years_Publication": 2001,
+      "Publisher": "Ryland Peters &amp; Small Ltd",
+      "Book_Cover": "http://images.amazon.com/images/P/1841721522.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1879384493,
+      "Book_Title": "If I'd Known Then What I Know Now: Why Not Learn from the Mistakes of Others? : You Can't Afford to Make Them All Yourself",
+      "Book_Author": "J. R. Parrish",
+      "Years_Publication": 2003,
+      "Publisher": "Cypress House",
+      "Book_Cover": "http://images.amazon.com/images/P/1879384493.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0061076031",
+      "Book_Title": "Mary-Kate &amp; Ashley Switching Goals (Mary-Kate and Ashley Starring in)",
+      "Book_Author": "Mary-Kate &amp; Ashley Olsen",
+      "Years_Publication": 2000,
+      "Publisher": "HarperEntertainment",
+      "Book_Cover": "http://images.amazon.com/images/P/0061076031.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0439095026",
+      "Book_Title": "Tell Me This Isn't Happening",
+      "Book_Author": "Robynn Clairday",
+      "Years_Publication": 1999,
+      "Publisher": "Scholastic",
+      "Book_Cover": "http://images.amazon.com/images/P/0439095026.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0689821166",
+      "Book_Title": "Flood : Mississippi 1927",
+      "Book_Author": "Kathleen Duey",
+      "Years_Publication": 1998,
+      "Publisher": "Aladdin",
+      "Book_Cover": "http://images.amazon.com/images/P/0689821166.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0971880107",
+      "Book_Title": "Wild Animus",
+      "Book_Author": "Rich Shapero",
+      "Years_Publication": 2004,
+      "Publisher": "Too Far",
+      "Book_Cover": "http://images.amazon.com/images/P/0971880107.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0345402871",
+      "Book_Title": "Airframe",
+      "Book_Author": "Michael Crichton",
+      "Years_Publication": 1997,
+      "Publisher": "Ballantine Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0345402871.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0345417623",
+      "Book_Title": "Timeline",
+      "Book_Author": "MICHAEL CRICHTON",
+      "Years_Publication": 2000,
+      "Publisher": "Ballantine Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0345417623.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0684823802",
+      "Book_Title": "OUT OF THE SILENT PLANET",
+      "Book_Author": "C.S. Lewis",
+      "Years_Publication": 1996,
+      "Publisher": "Scribner",
+      "Book_Cover": "http://images.amazon.com/images/P/0684823802.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0375759778",
+      "Book_Title": "Prague : A Novel",
+      "Book_Author": "ARTHUR PHILLIPS",
+      "Years_Publication": 2003,
+      "Publisher": "Random House Trade Paperbacks",
+      "Book_Cover": "http://images.amazon.com/images/P/0375759778.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0425163091",
+      "Book_Title": "Chocolate Jesus",
+      "Book_Author": "Stephan Jaramillo",
+      "Years_Publication": 1998,
+      "Publisher": "Berkley Publishing Group",
+      "Book_Cover": "http://images.amazon.com/images/P/0425163091.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 3404921038,
+      "Book_Title": "Wie Barney es sieht.",
+      "Book_Author": "Mordecai Richler",
+      "Years_Publication": 2002,
+      "Publisher": "LÃ?Â¼bbe",
+      "Book_Cover": "http://images.amazon.com/images/P/3404921038.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 34,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 3442353866,
+      "Book_Title": "Der Fluch der Kaiserin. Ein Richter- Di- Roman.",
+      "Book_Author": "Eleanor Cooney",
+      "Years_Publication": 2001,
+      "Publisher": "Goldmann",
+      "Book_Cover": "http://images.amazon.com/images/P/3442353866.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 3442410665,
+      "Book_Title": "Sturmzeit. Roman.",
+      "Book_Author": "Charlotte Link",
+      "Years_Publication": 1991,
+      "Publisher": "Goldmann",
+      "Book_Cover": "http://images.amazon.com/images/P/3442410665.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 3442446937,
+      "Book_Title": "Tage der Unschuld.",
+      "Book_Author": "Richard North Patterson",
+      "Years_Publication": 2000,
+      "Publisher": "Goldmann",
+      "Book_Cover": "http://images.amazon.com/images/P/3442446937.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0375406328",
+      "Book_Title": "Lying Awake",
+      "Book_Author": "Mark Salzman",
+      "Years_Publication": 2000,
+      "Publisher": "Alfred A. Knopf",
+      "Book_Cover": "http://images.amazon.com/images/P/0375406328.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0446310786",
+      "Book_Title": "To Kill a Mockingbird",
+      "Book_Author": "Harper Lee",
+      "Years_Publication": 1988,
+      "Publisher": "Little Brown &amp; Company",
+      "Book_Cover": "http://images.amazon.com/images/P/0446310786.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0449005615",
+      "Book_Title": "Seabiscuit: An American Legend",
+      "Book_Author": "LAURA HILLENBRAND",
+      "Years_Publication": 2002,
+      "Publisher": "Ballantine Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0449005615.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0060168013",
+      "Book_Title": "Pigs in Heaven",
+      "Book_Author": "Barbara Kingsolver",
+      "Years_Publication": 1993,
+      "Publisher": "Harpercollins",
+      "Book_Cover": "http://images.amazon.com/images/P/0060168013.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "038078243X",
+      "Book_Title": "Miss Zukas and the Raven's Dance",
+      "Book_Author": "Jo Dereske",
+      "Years_Publication": 1996,
+      "Publisher": "Avon",
+      "Book_Cover": "http://images.amazon.com/images/P/038078243X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "055321215X",
+      "Book_Title": "Pride and Prejudice",
+      "Book_Author": "Jane Austen",
+      "Years_Publication": 1983,
+      "Publisher": "Bantam",
+      "Book_Cover": "http://images.amazon.com/images/P/055321215X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "067176537X",
+      "Book_Title": "The Therapeutic Touch: How to Use Your Hands to Help or to Heal",
+      "Book_Author": "Dolores Krieger",
+      "Years_Publication": 1979,
+      "Publisher": "Fireside",
+      "Book_Cover": "http://images.amazon.com/images/P/067176537X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0061099686",
+      "Book_Title": "Downtown",
+      "Book_Author": "Anne Rivers Siddons",
+      "Years_Publication": 1995,
+      "Publisher": "HarperTorch",
+      "Book_Cover": "http://images.amazon.com/images/P/0061099686.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 45,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0553582909",
+      "Book_Title": "Icebound",
+      "Book_Author": "Dean R. Koontz",
+      "Years_Publication": 2000,
+      "Publisher": "Bantam Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0553582909.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0671888587",
+      "Book_Title": "I'll Be Seeing You",
+      "Book_Author": "Mary Higgins Clark",
+      "Years_Publication": 1994,
+      "Publisher": "Pocket",
+      "Book_Cover": "http://images.amazon.com/images/P/0671888587.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0553582747",
+      "Book_Title": "From the Corner of His Eye",
+      "Book_Author": "Dean Koontz",
+      "Years_Publication": 2001,
+      "Publisher": "Bantam Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0553582747.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 48,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0425182908",
+      "Book_Title": "Isle of Dogs",
+      "Book_Author": "Patricia Cornwell",
+      "Years_Publication": 2002,
+      "Publisher": "Berkley Publishing Group",
+      "Book_Cover": "http://images.amazon.com/images/P/0425182908.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 49,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "042518630X",
+      "Book_Title": "Purity in Death",
+      "Book_Author": "J.D. Robb",
+      "Years_Publication": 2002,
+      "Publisher": "Berkley Publishing Group",
+      "Book_Cover": "http://images.amazon.com/images/P/042518630X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0440223571",
+      "Book_Title": "This Year It Will Be Different: And Other Stories",
+      "Book_Author": "Maeve Binchy",
+      "Years_Publication": 1997,
+      "Publisher": "Dell",
+      "Book_Cover": "http://images.amazon.com/images/P/0440223571.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0812523873",
+      "Book_Title": "Proxies",
+      "Book_Author": "Laura J. Mixon",
+      "Years_Publication": 1999,
+      "Publisher": "Tor Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0812523873.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0842342702",
+      "Book_Title": "Left Behind: A Novel of the Earth's Last Days (Left Behind #1)",
+      "Book_Author": "Tim Lahaye",
+      "Years_Publication": 2000,
+      "Publisher": "Tyndale House Publishers",
+      "Book_Cover": "http://images.amazon.com/images/P/0842342702.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0440225701",
+      "Book_Title": "The Street Lawyer",
+      "Book_Author": "JOHN GRISHAM",
+      "Years_Publication": 1999,
+      "Publisher": "Dell",
+      "Book_Cover": "http://images.amazon.com/images/P/0440225701.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0060914068",
+      "Book_Title": "Love, Medicine and Miracles",
+      "Book_Author": "M.D. Bernie S. Siegel",
+      "Years_Publication": 1988,
+      "Publisher": "HarperCollins Publishers",
+      "Book_Cover": "http://images.amazon.com/images/P/0060914068.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0156047624",
+      "Book_Title": "All the King's Men",
+      "Book_Author": "Robert Penn Warren",
+      "Years_Publication": 1982,
+      "Publisher": "Harvest Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0156047624.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0245542957",
+      "Book_Title": "Pacific Northwest",
+      "Book_Author": "Hans Johannes Hoefer",
+      "Years_Publication": 1985,
+      "Publisher": "Chambers Harrap Publishers Ltd",
+      "Book_Cover": "http://images.amazon.com/images/P/0245542957.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0380715899",
+      "Book_Title": "A Soldier of the Great War",
+      "Book_Author": "Mark Helprin",
+      "Years_Publication": 1992,
+      "Publisher": "Avon Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0380715899.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0553280333",
+      "Book_Title": "Getting Well Again",
+      "Book_Author": "O. Carol Simonton Md",
+      "Years_Publication": 1992,
+      "Publisher": "Bantam",
+      "Book_Cover": "http://images.amazon.com/images/P/0553280333.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0961769947",
+      "Book_Title": "Northwest Wines and Wineries",
+      "Book_Author": "Chuck Hill",
+      "Years_Publication": 1993,
+      "Publisher": "Speed Graphics",
+      "Book_Cover": "http://images.amazon.com/images/P/0961769947.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 60,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0964778319",
+      "Book_Title": "An Atmosphere of Eternity: Stories of India",
+      "Book_Author": "David Iglehart",
+      "Years_Publication": 2002,
+      "Publisher": "Sunflower Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0964778319.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 61,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0671623249",
+      "Book_Title": "LONESOME DOVE",
+      "Book_Author": "Larry McMurtry",
+      "Years_Publication": 1986,
+      "Publisher": "Pocket",
+      "Book_Cover": "http://images.amazon.com/images/P/0671623249.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 62,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0679810307",
+      "Book_Title": "Shabanu: Daughter of the Wind (Border Trilogy)",
+      "Book_Author": "SUZANNE FISHER STAPLES",
+      "Years_Publication": 1991,
+      "Publisher": "Laurel Leaf",
+      "Book_Cover": "http://images.amazon.com/images/P/0679810307.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0679865691",
+      "Book_Title": "Haveli (Laurel Leaf Books)",
+      "Book_Author": "SUZANNE FISHER STAPLES",
+      "Years_Publication": 1995,
+      "Publisher": "Laurel Leaf",
+      "Book_Cover": "http://images.amazon.com/images/P/0679865691.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 64,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 2070423204,
+      "Book_Title": "Lieux dits",
+      "Book_Author": "Michel Tournier",
+      "Years_Publication": 2002,
+      "Publisher": "Gallimard",
+      "Book_Cover": "http://images.amazon.com/images/P/2070423204.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 65,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0345260317",
+      "Book_Title": "The Dragons of Eden: Speculations on the Evolution of Human Intelligence",
+      "Book_Author": "Carl Sagan",
+      "Years_Publication": 1978,
+      "Publisher": "Ballantine Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0345260317.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 66,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0394743741",
+      "Book_Title": "The yawning heights",
+      "Book_Author": "Aleksandr Zinoviev",
+      "Years_Publication": 1980,
+      "Publisher": "Random House",
+      "Book_Cover": "http://images.amazon.com/images/P/0394743741.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 67,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "042511774X",
+      "Book_Title": "Breathing Lessons",
+      "Book_Author": "Anne Tyler",
+      "Years_Publication": 1994,
+      "Publisher": "Berkley Publishing Group",
+      "Book_Cover": "http://images.amazon.com/images/P/042511774X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 68,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0804106304",
+      "Book_Title": "The Joy Luck Club",
+      "Book_Author": "Amy Tan",
+      "Years_Publication": 1994,
+      "Publisher": "Prentice Hall (K-12)",
+      "Book_Cover": "http://images.amazon.com/images/P/0804106304.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 69,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1853262404,
+      "Book_Title": "Heart of Darkness (Wordsworth Collection)",
+      "Book_Author": "Joseph Conrad",
+      "Years_Publication": 1998,
+      "Publisher": "NTC/Contemporary Publishing Company",
+      "Book_Cover": "http://images.amazon.com/images/P/1853262404.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 70,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0312970242",
+      "Book_Title": "The Angel Is Near",
+      "Book_Author": "Deepak Chopra",
+      "Years_Publication": 2000,
+      "Publisher": "St. Martin's Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0312970242.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 71,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1853260053,
+      "Book_Title": "Tess of the D'Urbervilles (Wordsworth Classics)",
+      "Book_Author": "Thomas Hardy",
+      "Years_Publication": 1997,
+      "Publisher": "NTC/Contemporary Publishing Company",
+      "Book_Cover": "http://images.amazon.com/images/P/1853260053.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 72,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1414035004,
+      "Book_Title": "The Adventures of Drew and Ellie: The Magical Dress",
+      "Book_Author": "Charles Noland",
+      "Years_Publication": 2003,
+      "Publisher": "1stBooks Library",
+      "Book_Cover": "http://images.amazon.com/images/P/1414035004.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 73,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0060938412",
+      "Book_Title": "The Accidental Virgin",
+      "Book_Author": "Valerie Frankel",
+      "Years_Publication": 2003,
+      "Publisher": "Avon Trade",
+      "Book_Cover": "http://images.amazon.com/images/P/0060938412.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 74,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0140067477",
+      "Book_Title": "The Tao of Pooh",
+      "Book_Author": "Benjamin Hoff",
+      "Years_Publication": 1983,
+      "Publisher": "Penguin Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0140067477.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 75,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0345465083",
+      "Book_Title": "Seabiscuit",
+      "Book_Author": "LAURA HILLENBRAND",
+      "Years_Publication": 2003,
+      "Publisher": "Ballantine Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0345465083.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 76,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0451625889",
+      "Book_Title": "The Prince",
+      "Book_Author": "Niccolo Machiavelli",
+      "Years_Publication": 1952,
+      "Publisher": "Signet Book",
+      "Book_Cover": "http://images.amazon.com/images/P/0451625889.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 77,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1558531025,
+      "Book_Title": "Life's Little Instruction Book (Life's Little Instruction Books (Paperback))",
+      "Book_Author": "H. Jackson Brown",
+      "Years_Publication": 1991,
+      "Publisher": "Thomas Nelson",
+      "Book_Cover": "http://images.amazon.com/images/P/1558531025.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 78,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0441783589",
+      "Book_Title": "Starship Troopers",
+      "Book_Author": "Robert A. Heinlein",
+      "Years_Publication": 1987,
+      "Publisher": "Ace Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0441783589.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 79,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0394895894",
+      "Book_Title": "The Ruby in the Smoke (Sally Lockhart Trilogy, Book 1)",
+      "Book_Author": "PHILIP PULLMAN",
+      "Years_Publication": 1988,
+      "Publisher": "Laurel Leaf",
+      "Book_Cover": "http://images.amazon.com/images/P/0394895894.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 80,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 1569871213,
+      "Book_Title": "Black Beauty (Illustrated Classics)",
+      "Book_Author": "Anna Sewell",
+      "Years_Publication": 1995,
+      "Publisher": "Landoll",
+      "Book_Cover": "http://images.amazon.com/images/P/1569871213.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 81,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0375410538",
+      "Book_Title": "Anil's Ghost",
+      "Book_Author": "MICHAEL ONDAATJE",
+      "Years_Publication": 2000,
+      "Publisher": "Knopf",
+      "Book_Cover": "http://images.amazon.com/images/P/0375410538.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 82,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0966986105",
+      "Book_Title": "Prescription for Terror",
+      "Book_Author": "Sandra Levy Ceren",
+      "Years_Publication": 1999,
+      "Publisher": "Andrew Scott Publishers",
+      "Book_Cover": "http://images.amazon.com/images/P/0966986105.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 83,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "087113375X",
+      "Book_Title": "Modern Manners: An Etiquette Book for Rude People",
+      "Book_Author": "P.J. O'Rourke",
+      "Years_Publication": 1990,
+      "Publisher": "Atlantic Monthly Press",
+      "Book_Cover": "http://images.amazon.com/images/P/087113375X.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 84,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0340767936",
+      "Book_Title": "Turning Thirty",
+      "Book_Author": "Mike Gayle",
+      "Years_Publication": 2000,
+      "Publisher": "Hodder &amp; Stoughton General Division",
+      "Book_Cover": "http://images.amazon.com/images/P/0340767936.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 85,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0743403843",
+      "Book_Title": "Decipher",
+      "Book_Author": "Stel Pavlou",
+      "Years_Publication": 2002,
+      "Publisher": "Simon &amp; Schuster (Trade Division)",
+      "Book_Cover": "http://images.amazon.com/images/P/0743403843.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 86,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0060930365",
+      "Book_Title": "My First Cousin Once Removed: Money, Madness, and the Family of Robert Lowell",
+      "Book_Author": "Sarah Payne Stuart",
+      "Years_Publication": 1999,
+      "Publisher": "Perennial",
+      "Book_Cover": "http://images.amazon.com/images/P/0060930365.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 87,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0060177586",
+      "Book_Title": "Standing Firm: A Vice-Presidential Memoir",
+      "Book_Author": "Dan Quayle",
+      "Years_Publication": 1994,
+      "Publisher": "Harpercollins",
+      "Book_Cover": "http://images.amazon.com/images/P/0060177586.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 88,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0071416331",
+      "Book_Title": "Team Bush : Leadership Lessons from the Bush White House",
+      "Book_Author": "Donald F. Kettl",
+      "Years_Publication": 2003,
+      "Publisher": "McGraw-Hill",
+      "Book_Cover": "http://images.amazon.com/images/P/0071416331.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 89,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0375509038",
+      "Book_Title": "The Right Man : The Surprise Presidency of George W. Bush",
+      "Book_Author": "DAVID FRUM",
+      "Years_Publication": 2003,
+      "Publisher": "Random House",
+      "Book_Cover": "http://images.amazon.com/images/P/0375509038.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 90,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0553062042",
+      "Book_Title": "Daybreakers Louis Lamour Collection",
+      "Book_Author": "Louis Lamour",
+      "Years_Publication": 1981,
+      "Publisher": "Bantam Doubleday Dell",
+      "Book_Cover": "http://images.amazon.com/images/P/0553062042.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 91,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0316769487",
+      "Book_Title": "The Catcher in the Rye",
+      "Book_Author": "J.D. Salinger",
+      "Years_Publication": 1991,
+      "Publisher": "Little, Brown",
+      "Book_Cover": "http://images.amazon.com/images/P/0316769487.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 92,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 8445071408,
+      "Book_Title": "El Senor De Los Anillos: LA Comunidad Del Anillo (Lord of the Rings (Spanish))",
+      "Book_Author": "J. R. R. Tolkien",
+      "Years_Publication": 2001,
+      "Publisher": "Minotauro",
+      "Book_Cover": "http://images.amazon.com/images/P/8445071408.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 93,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 8445071769,
+      "Book_Title": "El Senor De Los Anillos: Las DOS Torres (Lord of the Rings (Paperback))",
+      "Book_Author": "J. R. R. Tolkien",
+      "Years_Publication": 2001,
+      "Publisher": "Minotauro",
+      "Book_Cover": "http://images.amazon.com/images/P/8445071769.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 94,
+    "model": "books.book",
+    "fields": {
+      "ISBN": 8445071777,
+      "Book_Title": "El Senor De Los Anillos: El Retorno Del Rey (Tolkien, J. R. R. Lord of the Rings. 3.)",
+      "Book_Author": "J. R. R. Tolkien",
+      "Years_Publication": 2001,
+      "Publisher": "Distribooks",
+      "Book_Cover": "http://images.amazon.com/images/P/8445071777.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 95,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0679429220",
+      "Book_Title": "Midnight in the Garden of Good and Evil: A Savannah Story",
+      "Book_Author": "John Berendt",
+      "Years_Publication": 1994,
+      "Publisher": "Random House",
+      "Book_Cover": "http://images.amazon.com/images/P/0679429220.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 96,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0671867156",
+      "Book_Title": "Pretend You Don't See Her",
+      "Book_Author": "Mary Higgins Clark",
+      "Years_Publication": 1998,
+      "Publisher": "Pocket",
+      "Book_Cover": "http://images.amazon.com/images/P/0671867156.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 97,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0312252617",
+      "Book_Title": "Fast Women",
+      "Book_Author": "Jennifer Crusie",
+      "Years_Publication": 2001,
+      "Publisher": "St. Martin's Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0312252617.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 98,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0312261594",
+      "Book_Title": "Female Intelligence",
+      "Book_Author": "Jane Heller",
+      "Years_Publication": 2001,
+      "Publisher": "St. Martin's Press",
+      "Book_Cover": "http://images.amazon.com/images/P/0312261594.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 99,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0316748641",
+      "Book_Title": "Pasquale's Nose: Idle Days in an Italian Town",
+      "Book_Author": "Michael Rips",
+      "Years_Publication": 2002,
+      "Publisher": "Back Bay Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0316748641.01.MZZZZZZZ.jpg"
+    }
+  },
+  {
+    "pk": 100,
+    "model": "books.book",
+    "fields": {
+      "ISBN": "0316973742",
+      "Book_Title": "The Gospel of Judas: A Novel",
+      "Book_Author": "Simon Mawer",
+      "Years_Publication": 2002,
+      "Publisher": "Back Bay Books",
+      "Book_Cover": "http://images.amazon.com/images/P/0316973742.01.MZZZZZZZ.jpg"
+    }
+  }
+]

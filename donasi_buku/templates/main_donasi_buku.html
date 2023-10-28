@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Donasi Buku{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row row-cols-3">
+        {% for donation in donations %}
+        <div class="card mb-3">
+            <div class="row g-0 align-items-center justify-content-center">
+                <div class="col-md-3">
+                    <div class="m-2">
+                        <img {% if donation.image_url %}src="{{ donation.book.image_url }}"{% else %}src="{% static 'icon.png' %}"{% endif %} class="img-fluid rounded-start" alt="...">
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ donation.book.judul }}</h5>
+                        <div class="row">
+                            <div class="col-5">
+                                <p class="card-text">Penulis</p>
+                            </div>
+                            <div class="col-7">
+                                <p class="card-text">{{ donation.book.penulis }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <p class="card-text">Tahun terbit</p>
+                            </div>
+                            <div class="col-7">
+                                <p class="card-text">{{ donation.book.tahun_terbit }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <p class="card-text">Donatur</p>
+                            </div>
+                            <div class="col-7">
+                                <p class="card-text">{{ donation.donator }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <p class="card-text">Jumlah donasi</p>
+                            </div>
+                            <div class="col-7">
+                                <p class="card-text">{{ donation.donation_amount }} buku</p>
+                            </div>
+                        </div>
+                        <p class="card-text"><small class="text-muted">Didonasikan pada {{ donation.donation_date }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
