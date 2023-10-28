@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import RequestBuku, StatusRequest
 from .forms import RequestBukuForm
@@ -6,7 +6,11 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core import serializers
+import json
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt 
+from datetime import date, datetime
+from django.forms.models import model_to_dict
 
 # Create your views here.
 def status_request_buku(request):
@@ -58,3 +62,165 @@ def login_user(request):
             messages.info(request, 'Username atau password salah')
     context = {}
     return render(request, 'login.html', context)
+
+def json_format(request):
+    user = request.user
+    status_requests = StatusRequest.objects.all()
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        
+        
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
+def get_request_data(request):
+    status_requests = StatusRequest.objects.filter(buku__user=request.user)
+
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
+@csrf_exempt
+def add_request_buku_ajax(request):
+    if request.method == "POST":
+        user = request.user
+        judul_buku = request.POST.get('judul_buku')
+        author = request.POST.get('author')
+        tahun_publikasi = request.POST.get('tahun_publikasi')
+        isi_buku = request.POST.get('isi_buku')
+        
+        request_buku_data = RequestBuku(user=user, judul_buku=judul_buku, author=author, tahun_publikasi=tahun_publikasi, isi_buku=isi_buku, tanggal_request=date.today())
+        request_buku_data.save()
+        status_buku = StatusRequest(buku=request_buku_data, status='PENDING')
+        status_buku.save()
+
+        return HttpResponse("Created", status=201)
+    return HttpResponse("Not Created", status=400)
+
+@csrf_exempt
+def delete_request_buku_ajax(request, id):
+    if request.method == "DELETE":
+        try:
+            item = get_object_or_404(RequestBuku, pk=id)
+            item.delete()
+            return HttpResponse("Deleted", status=200)
+        except RequestBuku.DoesNotExist:
+            return HttpResponse({'error': 'Item not found'}, status=404)
+        except StatusRequest.DoesNotExist:
+            return HttpResponse({'error': 'Item not found'}, status=404)
+
+def filter_data_by_judul_buku(request):
+    user = request.user
+    status_requests = StatusRequest.objects.filter(buku__user=user).order_by('buku__judul_buku')
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
+def pending_request(request):
+    status_requests = StatusRequest.objects.filter(buku__user=request.user, status='PENDING')
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
+def diterima_request(request):
+    status_requests = StatusRequest.objects.filter(buku__user=request.user, status='DITERIMA')
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
+def ditolak_request(request):
+    status_requests = StatusRequest.objects.filter(buku__user=request.user, status='DITOLAK')
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
+def filter_data_by_author(request):
+    user = request.user
+    status_requests = StatusRequest.objects.filter(buku__user=user).order_by('buku__author')
+    data = []
+    
+    for status_request in status_requests:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+    
+    json_data = json.dumps(data)
+    
+    return HttpResponse(json_data, content_type='application/json')
+
