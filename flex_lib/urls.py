@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("request_buku/", include("request_buku.urls"), name="request_buku"),
     path('donasi_buku/', include('donasi_buku.urls'), name="donasi_buku"),
+    path('katalog_buku/', include('katalog_buku.urls'), name="katalog_buku"),
+    path("pinjam_buku/", include("pinjam_buku.urls"), name="pinjam_buku"),
     path('', include('katalog_buku.urls'), name="katalog_buku"),
     path('auth/', include('register.urls')),
 ]
