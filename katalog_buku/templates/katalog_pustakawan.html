@@ -75,7 +75,7 @@
     <title>Katalog Buku</title>
 
     <section>
-        <div style="opacity: 1; height: 600px;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+        <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
             <div class="container h-100">
                 <div class="row h-100">
                     <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
@@ -152,9 +152,9 @@
 
 <script>
     async function getProducts() {
-        return fetch("{% url 'katalog_buku:get_books' %}")
-            .then((res) => res.json());
+        return fetch("{% url 'katalog_buku:get_books' %}").then((res) => res.json());
     }
+
     async function refreshProducts() {
         document.getElementById("main-container").innerHTML = ""
         const products = await getProducts();

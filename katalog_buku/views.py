@@ -14,10 +14,12 @@ def get(request):
     all_product = Buku.objects.all()
     context = {'buku':all_product}
     if request.user.is_authenticated:
-        if request.user != "pustakawan":
+        context = {'buku': all_product, 
+                   'login_user': request.user}
+        if request.user.username != "pustakawan":
             return render(request,'katalog_users.html', context)
-        if request.user == "pustakawan":
-            return render(request,'katalog_pustawakan.html', context)
+        if request.user.username == "pustakawan":
+            return render(request,'katalog_pustakawan.html', context)
     return render(request,'katalog_buku.html', context)
 
 @csrf_exempt
