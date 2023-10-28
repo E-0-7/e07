@@ -10,4 +10,4 @@ class PinjamBuku(models.Model):
     durasi = models.IntegerField()
     nomor_telepon = models.IntegerField()
     alamat = models.TextField()
-    metode_pembayaran = models.CharField(max_length=20, default='Debit', choices=[('Debit', 'Debit'), ('Kredit', 'Kredit'), ('E-Wallet', 'E-Wallet')])
+    metode_pembayaran = models.CharField(max_length=20, default='Debit', choices=[('Debit', 'Debit'), ('Kredit', 'Kredit'), ('E-Wallet', 'E-Wallet')], null = True, blank = True)
