@@ -48,7 +48,7 @@
         }
     
         #item_view {
-            margin-top: 20px;  /* Atur sesuai kebutuhan Anda */
+            margin-top: 30px;  /* Atur sesuai kebutuhan Anda */
         }
 
         #foto_form {
@@ -58,34 +58,28 @@
             justify-content: center;
             text-align: center; */
         }
-
-        .transparent-circle {
-            background-color: rgba(202, 202, 202, 0.7); /* Ubah warna latar belakang dan opacity sesuai kebutuhan Anda */
-            border-radius: 100%; /* Membuat bentuk lingkaran */
-            padding: 50px; /* Jarak antara teks dengan batas lingkaran */
-            display: inline-block;
-            text-align: center;
-        }
     </style>
 
     <body>
         <section>
-            <div style="opacity: 1; height: 600px;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+            <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-image: url(https://images.alphacoders.com/132/1326370.png); background-position: center; background-size: cover;"></div>
+        
+            <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-color: rgba(0, 0, 0, 0.5);"></div>
+        
+            <div style="position: relative; height: 100vh;">
                 <div class="container h-100">
                     <div class="row h-100">
                         <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div style="max-width: 350px;">
-                                <div class="transparent-circle">
-                                    <h1 class="fw-bold" style="color: black;">Flex-Lib<br>Pinjam Buku</h1>
-                                    <p class="my-3" style="color: black;">Di Flex-lib, kamu dapat meminjam buku. Kami akan memproses peminjaman buku kamu dan memberikan buku tersebut jika tersedia.</p>
-                                </div>
+                                <h1 class="fw-bold" style="color: white;">Flex-Lib<br>Pinjam Buku</h1>
+                                <p class="my-3" style="color: white;">Di Flex-lib, kamu dapat meminjam buku. Kami akan memproses peminjaman buku kamu dan memberikan buku tersebut jika tersedia.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </section>        
+        <!-- <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -143,12 +137,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
-            <div class="container-fluid">      
-                <a class="navbar-brand" style="margin-left:30px;" href="#">Daftar Buku Dipinjam</a>
-                <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Pinjam Buku Sekarang</a>
+            <div class="container-fluid" style="margin-left:60px; margin-right:60px;">      
+                <a class="navbar-brand fw-bold">Daftar Buku</a>
+                <a class="btn btn-primary btn-lg me-2" role="button" href="{% url 'pinjam_buku:display_pinjam_buku' %}">Pinjam Buku</a>
             </div>
         </nav>
 
