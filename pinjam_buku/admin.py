@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import BukuDonasi
 
 # Register your models here.
-admin.site.register(BukuDonasi)
+from .models import PinjamBuku
+
+admin.site.register(PinjamBuku)
