@@ -50,12 +50,12 @@ def donasi_buku_main(request):
     return render(request, 'main_donasi_buku.html', context)
 
 def get_donations(request):
-    donations = BukuDonasi.objects.all()
+    donations = BukuDonasi.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", donations), content_type="application/json")
 
 def get_donations_by_book(request, title):
     title = title.replace("+", " ")
-    donations = BukuDonasi.objects.filter(book__book_title=title)
+    donations = BukuDonasi.objects.filter(title=title)
     return HttpResponse(serializers.serialize("json", donations), content_type="application/json")
 
 @csrf_exempt
