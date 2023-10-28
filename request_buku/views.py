@@ -132,6 +132,9 @@ def delete_request_buku_ajax(request, id):
         except StatusRequest.DoesNotExist:
             return HttpResponse({'error': 'Item not found'}, status=404)
 
+def team(request):
+    return render(request, 'team.html')
+
 def filter_data_by_judul_buku(request):
     user = request.user
     status_requests = StatusRequest.objects.filter(buku__user=user).order_by('buku__judul_buku')
