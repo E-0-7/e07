@@ -8,6 +8,5 @@ app_name="register"
 urlpatterns = [
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
-    path('request_buku/', status_request_buku, name='status_request_buku'),
     path('register/', register, name='register'),
 ]

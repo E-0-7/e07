@@ -2,76 +2,8 @@
 
 {% block content %}
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;700&display=swap');
-
-        * {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0; 
-        }
-
-        #main-container {
-            width: 1440px;
-            max-width: 100%;
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: center; 
-            padding: 10px; 
-        }
-
-        .card-container {
-            width: 300px; 
-            background-color: aliceblue;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            border: 1px solid #ddd; 
-            margin: 10px; 
-            padding: 10px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-        }
-
-        img {
-            width: 177px;
-            height: 217px;
-            border-radius: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .card-detail {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 200px;
-            margin-top: 10px; 
-        }
-
-    </style>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/katalog_buku.css' %}">
     <title>Katalog Buku</title>
 
     <section>
@@ -145,8 +77,31 @@
             </div>
         </div>
     </div>
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah buku</button>
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container">
+            <form method="get" action="{% url 'katalog_buku:search' %}">
+                <input type="text" name="search" id="search" placeholder="Search" />
+            </form>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-3">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navcol-3" class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'request_buku:status_request_buku' %}">Request Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'donasi_buku:donasi_buku_main' %}">Donasi Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Buku</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% comment %} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah buku</button> {% endcomment %}
 
     <div id="main-container"></div>
 

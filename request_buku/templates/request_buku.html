@@ -9,10 +9,6 @@
 <html>
         <title>Request Buku</title>
         <link rel="stylesheet" href="{% static 'css/request_buku.css' %}">
-        <style>
-            
-
-        </style>
     <body>
         <section>
             <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
@@ -50,7 +46,7 @@
                     </select>
                 </li>
                 <li class="nav-item" style="margin-left: 20px">
-                    <form method="get">
+                    <form method="get" action="{% url 'request_buku:search' %}">
                         <input type="text" name="search" id="search" placeholder="Search" />
                     </form>
                 </li>
@@ -133,13 +129,13 @@
         <div class="container d-flex flex-column align-items-center py-4 py-xl-5">
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2>Flex-Lib</h2>
-                    <p class="w-lg-50">Fitur </p>
+                    <h2 style="white-space: nowrap;">Flex-Lib</h2>
+                    <p class="w-lg-50">Fitur Request Buku memastikan pengguna mendapat buku yang ingin dibaca oleh mereka.</p>
                 </div>
             </div>
             <div class="row gy-4 w-100" style="max-width: 800px;">
                 <div class="col-12">
-                    <div class="card"><img class="card-img w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+                    <div class="card"><img class="card-img w-100 d-block" src="https://www.lifesavvy.com/thumbcache/0/0/cbc7fef431f67bd881b154a825cd03b9/p/uploads/2019/10/a1160da9.jpg" />
                         <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
                             <h4>Title</h4>
                             <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
@@ -263,7 +259,6 @@
             async function getFilterBukuByJudul() {
                 return fetch("{% url 'request_buku:filter_data_by_judul_buku' %}").then((res) => res.json())
             }
-
             
             async function refreshRequest() {
                 document.getElementById("item_view").innerHTML = ""
