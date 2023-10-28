@@ -2,161 +2,254 @@
 
 {% block content %}
 
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
+<html>
+    <title>Pinjam Buku</title>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;700&display=swap');
-
-        * {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body, h1, p, a, input, label, button {
+            font-family: 'Publica Sans', sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0; 
+        .card {
+            background-color: #1F487E; /* Dark Blue */
+            margin-left: 0;
+            margin-right: 0;
+            transition: transform 0.3s; /* Smooth transition for scaling */
         }
 
-        .main-container {
-            width: 1440px;
-            max-width: 100%;
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05); /* Enlarge the card by 5% when hovered */
+        }
+
+        .rounded-card {
+            border-radius: 15px !important;
+        }
+    
+        .card-fixed-height {
+            height: 500px; /* Adjust as needed */
             display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: center; 
-            padding: 10px; 
+            flex-direction: row;
+        }
+    
+        .card-fixed-height .card-body {
+            flex: 1;
+            overflow-y: auto;
         }
 
-        .card-container {
-            width: 300px;
-            height: 300px; 
-            background-color: aliceblue;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            border: 1px solid #ddd; 
-            margin: 10px; 
-            padding: 10px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-        }
-
-        img {
-            width: 110px;
-            height: 110px;
-            border-radius: 60px;
-            margin-top: 5px;
-        }
-
-        .card-detail {
+        .card-fixed-width {
+            width: 250px; /* Adjust as needed */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        }
+    
+        #item_view {
+            margin-top: 30px;  /* Atur sesuai kebutuhan Anda */
         }
 
-        .title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 200px; 
+        #foto_form {
+            width: 140px;
+            height: 210px;
+            /* align-items: center;
+            justify-content: center;
+            text-align: center; */
         }
     </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Card</title>
-</head>
 
-<body>
-    <section>
-        <div style="opacity: 1; height: 600px;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
-            <div class="container h-100">
-                <div class="row h-100">
-                    <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-                        <div style="max-width: 350px;">
-                            <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Request Buku</h1>
-                            <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
-                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+    <body>
+        <section>
+            <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-image: url(https://images.alphacoders.com/132/1326370.png); background-position: center; background-size: cover;"></div>
+        
+            <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-color: rgba(0, 0, 0, 0.5);"></div>
+        
+            <div style="position: relative; height: 100vh;">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                            <div style="max-width: 350px;">
+                                <h1 class="fw-bold" style="color: white;">Flex-Lib<br>Pinjam Buku</h1>
+                                <p class="my-3" style="color: white;">Di Flex-lib, kamu dapat meminjam buku. Kami akan memproses peminjaman buku kamu dan memberikan buku tersebut jika tersedia.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <div class="main-container">
-        {% for b in buku %}
-        <div class="card-container">
-            <img src="{{b.image}}">
-            <div class="card-detail">
-                <div class="title">
-                    <p>{{b.book_title}}</p>
-                    <p>{{b.book_author}}</p>
-                    <p>{{b.tahun_publikasi}}</p>
-                    <p>{{b.penerbit}}</p>
-                    <p>{{b.book_price}}</p>
+        </section>        
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pinjam Buku</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <img id="foto_form"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="judul_form"></p>
+                                        <p id="penulis_form"></p>
+                                        <p id="tahun_form"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <form id="form" onsubmit="return false;">                                    
+                                    {% csrf_token %}
+                                    <div class="mb-3" style="margin-bottom: 22px;">
+                                        <label class="col-form-label">
+                                            Durasi (hari)
+                                        </label>
+                                        <div style="display:block">
+                                            <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Durasi (hari)"></input>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-1form-label">
+                                            Nomor Telepon
+                                        </label>
+                                        <div style="display:block">
+                                            <input type="number" class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="08XXXXXXXXXX"></input>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-1form-label">
+                                            Alamat
+                                        </label>
+                                        <div style="display:block">
+                                            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal" onclick="addPinjamBuku()">Tambah Pinjam</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <button></button>
-        <button></button>
-        {%endfor%}
-    </div>
-</body>
 
-<script>
-    async function getProducts() {
-        return fetch("{% url 'katalog_buku:get_books' %}")
-            .then((res) => res.json());
-    }
-    async function refreshProducts() {
-        const mainContainer = document.getElementById("main-container");
-        mainContainer.innerHTML = "";
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
+            <div class="container-fluid" style="margin-left:60px; margin-right:60px;">      
+                <a class="navbar-brand fw-bold">Daftar Buku</a>
+                <a class="btn btn-primary btn-lg me-2" role="button" href="{% url 'pinjam_buku:list_pinjam_buku' %}">Pinjam Buku</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <input type="hidden" id="book_id" name="book_id">
+                {% for data_buku in buku %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">                        
+                    <div class="card text-white mb-4 shadow-sm rounded-card card-fixed-height card-fixed-width">
+                        <img class="card-img-top" alt="Thumbnail [200x300]" src="{{data_buku.url_foto_large}}" style="width: 100%; height: 300px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h5 class="card-text mb-1 text-center fw-bold">{{ data_buku.book_title }}</h5>
+                                <h6 class="card-text mb-1 text-center fw-bold">{{ data_buku.book_author }} </h6>
+                                <h6 class="card-text mb-1 text-center fw-bold">{{ data_buku.tahun_publikasi}}</h6>
+                                <h6 class="card-text mb-1 text-center fw-bold">{{data_buku.penerbit}}</h6>
+                                <a class="btn btn-primary btn-md me-2 pinjam-btn" role="button" data-bs-toggle="modal" data-bs-target="#requestModal" 
+                                data-image="{{data_buku.url_foto_large}}"
+                                data-id="{{data_buku.id}}" 
+                                data-title="{{ data_buku.book_title }}" 
+                                data-author="{{ data_buku.book_author }}" 
+                                data-year="{{ data_buku.tahun_publikasi }}">Pinjam Buku Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
 
-        const products = await getProducts();
+        <!-- <div id="item_view"></div> -->
 
-        products.forEach((buku) => {
-            const cardContainer = document.createElement("div");
-            cardContainer.className = "card-container";
-            cardContainer.innerHTML = `
-                <img src="${buku.fields.url_foto_large}">
-            `;
+        <script>
+            // async function getBuku() {
+            //     return fetch("{% url 'pinjam_buku:get_katalog_pinjam_buku' %}").then((res) => res.json())
+            // }
 
-            const cardDetail = document.createElement("div");
-            cardDetail.className = "card-detail";
+            // async function refreshKatalog() {
+            //     document.getElementById("item_view").innerHTML = "";
+            //     const buku = await getBuku();
+            //     let htmlString = '<div class="container"><div class="row">'; // Mulai container dan row di sini
 
-            const titleElement = document.createElement("div");
-            titleElement.className = "title";
-            titleElement.innerHTML = `
-                <p>${buku.fields.book_title}</p>
-                <p>${buku.fields.book_author}</p>
-                <p>${buku.fields.tahun_publikasi}</p>
-                <p>${buku.fields.penerbit}</p>
-                <p>${buku.fields.book_price}</p>
-            `;
+            //     buku.forEach((request) => {
+            //         htmlString += `
+            //         <div class="col-lg-3 col-md-4 col-sm-6 col-12">                        
+            //             <div class="card text-white mb-4 shadow-sm rounded-card card-fixed-height card-fixed-width">
+            //                 <img class="card-img-top" alt="Thumbnail [200x300]" src="${request.fields.url_foto_large}" style="width: 100%; height: 300px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            //                 <div class="card-body d-flex flex-column">
+            //                     <div class="d-flex flex-column justify-content-center">
+            //                         <h5 class="card-text mb-1 text-center fw-bold">${request.fields.book_title}</h5>
+            //                         <h6 class="card-text mb-1 text-center fw-bold">${request.fields.book_author}</h6>
+            //                         <h6 class="card-text mb-1 text-center fw-bold">${request.fields.tahun_publikasi}</h6>
+            //                         <h6 class="card-text mb-1 text-center fw-bold">${request.fields.penerbit}</h6>
+            //                         <a class="btn btn-primary btn-md me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Pinjam Buku Sekarang</a>
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //         </div>`
+            //     })
+            //     htmlString += '</div></div>'; // Tutup container dan row di sini
+            //     document.getElementById("item_view").innerHTML = htmlString;
+            // }
 
-            cardDetail.appendChild(titleElement);
-            cardContainer.appendChild(cardDetail);
-            mainContainer.appendChild(cardContainer);
-        });
-    }
+            document.addEventListener('DOMContentLoaded', function() {
+                let pinjamButtons = document.querySelectorAll('.pinjam-btn');
 
-    refreshProducts();
-</script>
+                pinjamButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        // Get data attributes from clicked button
+                        let bookId = button.getAttribute('data-id');
+                        let bookTitle = button.getAttribute('data-title');
+                        let bookAuthor = button.getAttribute('data-author');
+                        let bookYear = button.getAttribute('data-year');
+                        let bookImage = button.getAttribute('data-image');
 
+                        // Assign the id to hidden input for later use
+                        document.getElementById('book_id').value = bookId;
+
+                        // Populate the modal with the data
+                        let modal = document.getElementById('requestModal');
+                        modal.querySelector('#foto_form').src = bookImage;
+                        modal.querySelector('#judul_form').textContent = bookTitle;
+                        modal.querySelector('#penulis_form').textContent = bookAuthor;
+                        modal.querySelector('#tahun_form').textContent = bookYear;
+                        
+                        document.getElementById("form").reset();
+                    });
+                });
+            });
+
+
+
+            async function addPinjamBuku() {
+                let buku_id = document.getElementById('book_id').value;
+                fetch(`add_pinjam_buku_ajax/${buku_id}`, {
+                    method: "POST",
+                    body: new FormData(document.getElementById("form")),
+                }).then(refreshKatalog());
+
+                return false
+            }
+
+
+            refreshKatalog()
+        </script>
+    </body>
 </html>
 
 {% endblock content %}
