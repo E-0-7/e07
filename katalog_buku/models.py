@@ -10,3 +10,4 @@ class Buku(models.Model):
     url_foto_kecil = models.URLField(null=True, blank=True)
     url_foto_medium = models.URLField(null=True, blank=True)
     url_foto_large = models.URLField(null=True, blank=True)
+    book_price = models.IntegerField(null=True, blank=True)
