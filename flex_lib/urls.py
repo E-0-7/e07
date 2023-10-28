@@ -23,4 +23,5 @@ urlpatterns = [
     path('donasi_buku/', include('donasi_buku.urls'), name="donasi_buku"),
     path('katalog_buku/', include('katalog_buku.urls'), name="katalog_buku"),
     path('', include('register.urls')),
+
 ]
