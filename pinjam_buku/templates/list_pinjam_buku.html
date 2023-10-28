@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <title>Pinjam Buku</title>
+
+    <style>
+        body, h1, p, a, input, label, button {
+            font-family: 'Publica Sans', sans-serif;
+        }
+
+        .card {
+            background-color: #1F487E; /* Dark Blue */
+            margin-left: 0;
+            margin-right: 0;
+            transition: transform 0.3s; /* Smooth transition for scaling */
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05); /* Enlarge the card by 5% when hovered */
+        }
+
+        .rounded-card {
+            border-radius: 15px !important;
+        }
+    
+        .card-fixed-height {
+            height: 500px; /* Adjust as needed */
+            display: flex;
+            flex-direction: row;
+        }
+    
+        .card-fixed-height .card-body {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .card-fixed-width {
+            width: 250px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+        }
+    
+        #item_view {
+            margin-top: 20px;  /* Atur sesuai kebutuhan Anda */
+        }
+
+        #foto_form {
+            width: 140px;
+            height: 210px;
+            /* align-items: center;
+            justify-content: center;
+            text-align: center; */
+        }
+
+        .transparent-circle {
+            background-color: rgba(202, 202, 202, 0.7); /* Ubah warna latar belakang dan opacity sesuai kebutuhan Anda */
+            border-radius: 100%; /* Membuat bentuk lingkaran */
+            padding: 50px; /* Jarak antara teks dengan batas lingkaran */
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
+
+    <body>
+        <section>
+            <div style="opacity: 1; height: 600px;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                            <div style="max-width: 350px;">
+                                <div class="transparent-circle">
+                                    <h1 class="fw-bold" style="color: black;">Flex-Lib<br>Pinjam Buku</h1>
+                                    <p class="my-3" style="color: black;">Di Flex-lib, kamu dapat meminjam buku. Kami akan memproses peminjaman buku kamu dan memberikan buku tersebut jika tersedia.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pinjam Buku</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col"><img id="foto_form" src="http://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Judul Buku</p>
+                                        <p>Penulis</p>
+                                        <p>Tahun publikasi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <form id="form" onsubmit="return false;">                                    
+                                    {% csrf_token %}
+                                    <div class="mb-3" style="margin-bottom: 22px;">
+                                        <label class="col-form-label">
+                                            Duration (day)
+                                        </label>
+                                        <div style="display:block">
+                                            <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Duration (day)"></input>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-1form-label">
+                                            Phone Number
+                                        </label>
+                                        <div style="display:block">
+                                            <input type="number" class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="08XXXXXXXXXX"></input>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-1form-label">
+                                            Shipping Address
+                                        </label>
+                                        <div style="display:block">
+                                            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Shipping Address"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Tambah Pinjam</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
+            <div class="container-fluid">      
+                <a class="navbar-brand" style="margin-left:30px;" href="#">Daftar Buku Dipinjam</a>
+                <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Pinjam Buku Sekarang</a>
+            </div>
+        </nav>
+
+        <div id="item_view"></div>
+        <!-- <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Pinjam Buku Sekarang</a> -->
+
+        <script>
+            async function getPinjamBuku() {
+                return fetch("{% url 'pinjam_buku:get_pinjam_data_ajax' %}").then((res) => res.json())
+            }
+
+            async function refreshPinjam() {
+                document.getElementById("item_view").innerHTML = "";
+                const pinjamBuku = await getPinjamBuku();
+                let htmlString = '<div class="container"><div class="row">'; // Mulai container dan row di sini
+
+                pinjamBuku.forEach((request) => {
+                    htmlString += `
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">                        
+                        <div class="card text-white mb-4 shadow-sm rounded-card card-fixed-height card-fixed-width">
+                            <img class="card-img-top" alt="Thumbnail [200x300]" src="${request.url_foto_large}" style="width: 100%; height: 300px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h5 class="card-text mb-1 text-center fw-bold">${request.book_title}</h5>
+                                    <h6 class="card-text mb-1 text-center fw-bold">${request.book_author}</h6>
+                                    <h6 class="card-text mb-1 text-center fw-bold">${request.tahun_publikasi}</h6>
+                                </div>
+                                <div>
+                                    <p class="card-text mb-1" style="color: #e2e2e2;">Nama peminjam: ${request.username}</p>
+                                    <p class="card-text mb-1" style="color: #e2e2e2;">Durasi (hari): ${request.durasi}</p>
+                                    <p class="card-text mb-1" style="color: #e2e2e2;">Nomor telepon: ${request.nomor_telepon}</p>
+                                    <p class="card-text mb-1" style="color: #e2e2e2;">Alamat: ${request.alamat}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                htmlString += '</div></div>'; // Tutup container dan row di sini
+                document.getElementById("item_view").innerHTML = htmlString;
+            }
+            refreshPinjam();
+
+        </script>
+    </body>
+</html>
+
+{% endblock content %}
