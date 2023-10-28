@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import status_request_buku, add_request_buku_view, login_user, add_request_buku_ajax, get_request_data
 from .views import json_format, filter_data_by_judul_buku, filter_data_by_author, diterima_request, ditolak_request, pending_request
-from .views import delete_request_buku_ajax, search
+from .views import delete_request_buku_ajax, search, team
 
 app_name = 'request_buku'
 
@@ -18,4 +18,5 @@ urlpatterns = [
     path('ditolak_request/', ditolak_request, name='ditolak_request'),
     path('pending_request/', pending_request, name='pending_request'),
     path('delete_request_buku/<int:id>', delete_request_buku_ajax, name='delete_request_buku_ajax'),
+    path('team/', team, name='team'),
 ]
