@@ -7,9 +7,8 @@ from katalog_buku.models import Buku
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
-import json
 from django.core import serializers
-
+import json
 
 # Create your views here.
 def list_pinjam_buku(request):
@@ -26,6 +25,7 @@ def list_pinjam_buku(request):
             'pinjam_buku': pinjam_buku,        
         }
         return render(request, 'list_pinjam_buku.html', context)
+    
 def get_katalog_pinjam_buku(request):
     data = Buku.objects.all()
     return HttpResponse(serializers.serialize('json', data), content_type='application/json')
@@ -64,54 +64,6 @@ def get_pinjam_data_ajax(request):
     json_data = json.dumps(data)
     
     return HttpResponse(json_data, content_type='application/json')
-
-# @csrf_exempt
-# def get_pinjam_data_ajax_user(request):
-#     user = request.user
-#     pinjam_buku = PinjamBuku.objects.filter(user=user)
-#     if user.is_authenticated:
-#         if request.user == "pustakawan":
-#             pinjam_buku = PinjamBuku.objects.all()
-#     data = []
-    
-#     for buku_dipinjam in pinjam_buku:
-#         buku = buku_dipinjam.buku
-#         buku_dict = model_to_dict(buku)
-#         buku_dict['username'] = user.username
-#         buku_dict['durasi'] = buku_dipinjam.durasi
-#         buku_dict['nomor_telepon'] = buku_dipinjam.nomor_telepon
-#         buku_dict['alamat'] = buku_dipinjam.alamat
-
-#         data.append(buku_dict)
-    
-#     json_data = json.dumps(data)
-    
-#     return HttpResponse(json_data, content_type='application/json')
-
-# def add_pinjam_buku(request):
-#     form = PinjamForm(request.POST or None)
-
-#     if form.is_valid() and request.method == "POST":
-#         pinjam_buku = form.save(commit=False)
-#         pinjam_buku.user = request.user
-#         pinjam_buku.save()
-#         return HttpResponseRedirect(reverse('pinjam_buku:list_pinjam_buku'))
-    
-#     context = {"form": form}
-#     return render(request, 'add_pinjam_buku.html', context)
-
-# def add_pinjam_buku_by_id(request,id):
-#     form = PinjamFormByID(request.POST or None)
-
-#     if form.is_valid() and request.method == "POST":
-#         pinjam_buku = form.save(commit=False)
-#         pinjam_buku.buku = get_object_or_404(Buku, pk = id)
-#         pinjam_buku.user = request.user
-#         pinjam_buku.save()
-#         return HttpResponseRedirect(reverse('pinjam_buku:list_pinjam_buku'))
-    
-#     context = {"form": form}
-#     return render(request, 'add_pinjam_buku.html', context)
 
 @csrf_exempt
 def add_pinjam_buku_ajax(request, id):
