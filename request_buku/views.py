@@ -133,6 +133,39 @@ def delete_request_buku_ajax(request, id):
         except StatusRequest.DoesNotExist:
             return HttpResponse({'error': 'Item not found'}, status=404)
 
+def team(request):
+    return render(request, 'team.html')
+
+def search(request):
+    search_query = request.GET.get('search')
+    if search_query:
+        status_requests = StatusRequest.objects.filter(buku__user=request.user, buku__judul_buku__icontains=search_query)
+
+        # data = []
+
+        # for status_request in status_requests:
+        #     request_buku = status_request.buku
+        #     request_buku_dict = model_to_dict(request_buku)
+        #     request_buku_dict['status'] = status_request.status
+
+        #     request_date = status_request.buku.tanggal_request
+
+        #     request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        #     data.append(request_buku_dict)
+
+        # json_data = json.dumps(data)
+
+        # return HttpResponse(json_data, content_type='application/json')
+
+        context = {
+            'login_user': request.user,
+            'status_requests': status_requests,
+        }
+
+        return render(request, 'search.html', context)
+
+
+
 def filter_data_by_judul_buku(request):
     user = request.user
     status_requests = StatusRequest.objects.filter(buku__user=user).order_by('buku__judul_buku')
