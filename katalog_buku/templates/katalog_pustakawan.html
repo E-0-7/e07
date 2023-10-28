@@ -90,13 +90,71 @@
         </div>
     </section>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Buku Baru</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="isbn" class="col-form-label">ISBN:</label>
+                            <input type="text" class="form-control" id="isbn" name="isbn"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_title" class="col-form-label">Judul:</label>
+                            <input type="text" class="form-control" id="book_title" name="book_title"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_author" class="col-form-label">Penulis:</label>
+                            <input type="text" class="form-control" id="book_author" name="book_author"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tahun_publikasi" class="col-form-label">Tahun terbit:</label>
+                            <input type="number" class="form-control" id="tahun_publikasi" name="tahun_publikasi"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="penerbit" class="col-form-label">Penerbit:</label>
+                            <input type="text" class="form-control" id="penerbit" name="penerbit"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="url_foto_kecil" class="col-form-label">Url foto(kecil):</label>
+                            <input type="url" class="form-control" id="url_foto_kecil" name="url_foto_kecil"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="url_foto_medium" class="col-form-label">Url foto(sedang):</label>
+                            <input type="url" class="form-control" id="url_foto_medium" name="url_foto_medium"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="url_foto_large" class="col-form-label">Url foto(besar):</label>
+                            <input type="url" class="form-control" id="url_foto_large" name="url_foto_large"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_price" class="col-form-label">Harga buku:</label>
+                            <input type="number" class="form-control" id="book_price" name="book_price"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Tambah buku</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah buku</button>
+
     <div id="main-container"></div>
 
 <script>
     async function getProducts() {
-        return fetch("{% url 'katalog_buku:get_books' %}")
-            .then((res) => res.json());
+        return fetch("{% url 'katalog_buku:get_books' %}").then((res) => res.json());
     }
+
     async function refreshProducts() {
         document.getElementById("main-container").innerHTML = ""
         const products = await getProducts();
@@ -123,6 +181,16 @@
     }
 
     refreshProducts()
+    function addProduct() {
+        fetch("{% url 'katalog_buku:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+    document.getElementById("button_add").onclick = addProduct
 </script>
 
 
