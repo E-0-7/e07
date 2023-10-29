@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+    <link rel="stylesheet" href="{% static 'css/katalog_buku.css' %}">    
+    <title>Katalog Buku</title>
+
+    <section>
+        <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                        <div style="max-width: 350px;">
+                            <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Katalog Buku</h1>
+                            <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
+                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <div id="main-container"></div>
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'katalog_buku:get_books' %}")
+            .then((res) => res.json());
+    }
+    async function refreshProducts() {
+        document.getElementById("main-container").innerHTML = ""
+        const products = await getProducts();
+
+        let htmlString = ""
+
+        products.forEach((buku) => {
+            htmlString += `
+                <div class="card-container">
+                    <img src=${buku.fields.url_foto_large}>
+                    <div class="card-detail">
+                        <div class="title">
+                            <p>${buku.fields.book_title}</p>
+                            <p>${buku.fields.book_author}</p>
+                            <p>${buku.fields.tahun_publikasi}</p>
+                            <p>${buku.fields.penerbit}</p>
+                            <p>Rp ${buku.fields.book_price}</p>
+                        </div>   
+                    </div>
+                </div>
+            `
+        })
+        document.getElementById("main-container").innerHTML = htmlString
+    }
+
+    refreshProducts()
+</script>
+
+
+{% endblock content %}

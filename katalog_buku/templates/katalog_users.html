@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/katalog_buku.css' %}">
+    <title>Product Card</title>
+
+    <section>
+        <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                        <div style="max-width: 350px;">
+                            <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Request Buku</h1>
+                            <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
+                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container">
+            
+            <form method="get" action="{% url 'katalog_buku:search' %}">
+                <input type="text" name="search" id="search" placeholder="Search" />
+            </form>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-3">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navcol-3" class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'request_buku:status_request_buku' %}">Request Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'donasi_buku:donasi_buku_main' %}">Donasi Buku</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="main-container"></div>
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'katalog_buku:get_books' %}")
+            .then((res) => res.json());
+    }
+    async function refreshProducts() {
+        document.getElementById("main-container").innerHTML = ""
+        const products = await getProducts();
+
+        let htmlString = ""
+
+        products.forEach((buku) => {
+            htmlString += `
+                <div class="card-container">
+                    <img src=${buku.fields.url_foto_large}>
+                    <div class="card-detail">
+                        <div class="title">
+                            <p>${buku.fields.book_title}</p>
+                            <p>${buku.fields.book_author}</p>
+                            <p>${buku.fields.tahun_publikasi}</p>
+                            <p>${buku.fields.penerbit}</p>
+                            <p>Rp ${buku.fields.book_price}</p>
+                        </div>   
+                    </div>
+                </div>
+            `
+        })
+        document.getElementById("main-container").innerHTML = htmlString
+    }
+
+    refreshProducts();
+</script>
+
+
+{% endblock content %}

@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+        <title>Request Buku</title>
+        <link rel="stylesheet" href="{% static 'css/request_buku.css' %}">
+    <body>
+        <section>
+            <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                            <div style="max-width: 350px;">
+                                <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Request Buku</h1>
+                                <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
+                                <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
+            <div class="container-fluid">
+                
+            <a class="navbar-brand" style="margin-left:30px;" href="#">Request Buku</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse container justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Filter</a>
+                </li>
+                <li class="nav-item">
+                    <select name="filter" id="filter">
+                        <option value="" selected="">---------</option>
+                        <option value="status">Status</option>
+                        <option value="tanggal_request">Tanggal Request</option>
+                    </select>
+                </li>
+                <li class="nav-item" style="margin-left: 20px">
+                    <form method="get" action="{% url 'request_buku:search' %}">
+                        <input type="text" name="search" id="search" placeholder="Search" />
+                    </form>
+                </li>
+                </ul>
+                <div class="d-none d-md-block">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item text-center">
+                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+            </div>
+        </nav>
+
+
+        <div id="item_view">
+            
+        </div>
+
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Minta Request Buku</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return false;">
+                            {% csrf_token %}
+                            <div class="mb-3" style="margin-bottom: 22px;">
+                                <label class="col-form-label">
+                                    Judul Buku
+                                </label>
+                                <div style="display:block">
+                                    <input type="text" class="form-control" id="judul_buku" name="judul_buku" placeholder="Judul Buku"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="col-1form-label">
+                                    Isi Buku (Secara Garis Besar)
+                                </label>
+                                <div style="display:block">
+                                    <textarea type="text" class="form-control" id="isi_buku" name="isi_buku"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="col-1form-label">
+                                    Penulis Buku
+                                </label>
+                                <div style="display:block">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="Penulis Buku"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3" style="margin-bottom: 24px;">
+                                <label class="form-label">
+                                    Tahun Publikasi
+                                </label>
+                                <div style="display:block">
+                                    <input type="number" class="form-control" id="tahun_publikasi" name="tahun_publikasi" placeholder="Tahun Publikasi"></input>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Tambah Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="col" style="text-align: center;">
+            <button type="button" class="btn btn-primary btn-lg me-2" id="button_request" style="text-align: center;" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</button>
+        </div>
+
+        <div class="container d-flex flex-column align-items-center py-4 py-xl-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 style="white-space: nowrap;">Flex-Lib</h2>
+                    <p class="w-lg-50">Fitur Request Buku memastikan pengguna mendapat buku yang ingin dibaca oleh mereka.</p>
+                </div>
+            </div>
+            <div class="row gy-4 w-100" style="max-width: 800px;">
+                <div class="col-12">
+                    <div class="card"><img class="card-img w-100 d-block" src="https://www.lifesavvy.com/thumbcache/0/0/cbc7fef431f67bd881b154a825cd03b9/p/uploads/2019/10/a1160da9.jpg" />
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                            <h4>Title</h4>
+                            <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card"><img class="card-img w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                            <h4>Title</h4>
+                            <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card"><img class="card-img w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                            <h4>Title</h4>
+                            <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container py-4 py-xl-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3>Kudos</h3>
+                </div>
+            </div>
+            <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+                <div class="col">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <p class="text-center">Request Buku di Flex-lib sangat berguna karena buku yang direquest akan langsung ada</p>
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="data:image/jpeg;base64,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" />
+                            <div>
+                                <p class="fw-bold text-primary mb-0">Nana Riana</p>
+                                <p class="text-muted mb-0">Pembaca Setia</p>
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center p-0"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <p class="text-center">Request Buku Flex-lib Sat set sat set ..... cepat dan langsung ada</p>
+                        <div class="d-flex">
+                            <img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNiKHl8fK5bW5EltjlE9yctGqE0js2FnejPA&usqp=CAU" />
+                            <div>
+                                <p class="fw-bold text-primary mb-0">Joe Mama</p>
+                                <p class="text-muted mb-0">Pembaca Paling normal</p>
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center p-0"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <p class="text-center">Fitur Request Buku Flex-lib sangat cepat dan meningkatkan minat membaca.</p>
+                        <div class="d-flex">
+                            <img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEpcSZJW3MFElQoA0AzucQF0f2Q4ZGdP-1AA&usqp=CAU" />
+                            <div>
+                                <p class="fw-bold text-primary mb-0">Wilson Lo Siento</p>
+                                <p class="text-muted mb-0">Pencari Buku</p>
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-none">
+                            <div class="card-body d-flex align-items-center p-0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-flex flex-column align-items-center py-4 py-xl-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2>Heading</h2>
+                    <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p>
+                </div>
+            </div>
+            <div class="row gy-4 w-100" style="max-width: 800px;">
+                <div class="col-12">
+                    <div class="card"><img class="card-img w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                            <h4>Title</h4>
+                            <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card"><img class="card-img w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                            <h4>Title</h4>
+                            <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card"><img class="card-img w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                            <h4>Title</h4>
+                            <p>Volutpat habitasse risus posuere, commodo fusce donec. Turpis donec tristique.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            async function getRequestBuku() {
+                return fetch("{% url 'request_buku:get_request_data' %}").then((res) => res.json())
+            }
+
+            async function getFilterBukuByJudul() {
+                return fetch("{% url 'request_buku:filter_data_by_judul_buku' %}").then((res) => res.json())
+            }
+            
+            async function refreshRequest() {
+                document.getElementById("item_view").innerHTML = ""
+                const requestBuku = await getRequestBuku()
+                let htmlString = ""
+                requestBuku.forEach((request) => {
+                    htmlString += `<div id="main_list" class="row">
+                        <div id="icon_div" >
+                            <div id="icon_background" >
+                               <img id="book_logo" src={% static 'css/asset/icon.png' %} alt="logo buku">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="judul_buku">
+                                            <p  class="status" style="display: inline-flex;">${ request.judul_buku }</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="author_buku">
+                                            <p  class="info_buku" style="display: inline-flex;">Author: ${ request.author }</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p  class="info_buku" style="text-align: center; display: inline-flex;">Tahun: ${ request.tahun_publikasi }</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="text-align: center;">
+                            <div style="text-align: center;">
+                                <p  class="info_buku" style="text-align: center; display: inline-flex;">Tanggal request: ${ request.tanggal_request }</p>
+                            </div>
+                        </div>
+                        <div class="col" id="tempat_status">
+                            <div id="DITOLAK_button">
+                                <p onClick="deleteRequestBuku(${ request.id })" class="status" id="DITOLAK_text">Hapus</p>
+                            </div>
+                            <div id="${ request.status }_button">
+                                <p class="status" id="${ request.status }_text">${ request.status }</p>
+                            </div>
+                        </div>
+                    </div>`
+                })
+
+                document.getElementById("item_view").innerHTML = htmlString
+            }
+
+            async function addRequestBuku() {
+                fetch("{% url 'request_buku:add_request_buku_ajax' %}", {
+                    method: "POST",
+                    body: new FormData(document.getElementById("form")),
+                }).then(refreshRequest);
+
+                document.getElementById("form").reset();
+                return false;
+            }
+
+            async function deleteRequestBuku(id) {
+                await fetch(`delete_request_buku/${id}`, {
+                    method: "DELETE",
+                }).then(refreshRequest);
+            }
+
+            document.getElementById("button_add").onclick = addRequestBuku
+
+            refreshRequest()
+        </script>
+    </body>
+</html>
+
+{% endblock content %}
+
+
