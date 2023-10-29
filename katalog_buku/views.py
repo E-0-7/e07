@@ -27,7 +27,7 @@ def get(request):
 
 def search(request):
     buku_dicari = request.GET.get('search')
-    print("buku_dicari: ", buku_dicari)
+   
     if buku_dicari:
         hasil_buku = Buku.objects.filter(Q(book_title__icontains=buku_dicari) | Q(book_author__icontains=buku_dicari) | Q(penerbit__icontains=buku_dicari) | Q(tahun_publikasi__icontains=buku_dicari))
 
