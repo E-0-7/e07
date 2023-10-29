@@ -31,7 +31,7 @@ def donasi_buku_form(request):
 
     return render(request, 'donasi_buku.html', {})
 
-@login_required(login_url='/login')
+@login_required(login_url='register:login')
 def donasi_buku_main(request):
     form = DonationForm(request.POST or None)
     donations = BukuDonasi.objects.filter(user=request.user)

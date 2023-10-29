@@ -9,87 +9,7 @@
 <html>
     <title>Pinjam Buku</title>
 
-    <style>
-        body, h1, p, a, input, label, button {
-            font-family: 'Publica Sans', sans-serif;
-        }
-
-        body {
-            background-color: rgb(11, 31, 73);
-        }
-
-        .card {
-            background-color: rgb(22, 56, 105);
-            margin-left: 0;
-            margin-right: 0;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transform: scale(1.05);
-        }
-
-        .rounded-card {
-            border-radius: 15px !important;
-        }
-    
-        .card-fixed-height {
-            height: 500px;
-            display: flex;
-            flex-direction: row;
-        }
-    
-        .card-fixed-height .card-body {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .card-fixed-width {
-            width: 250px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #foto_form {
-            width: 140px;
-            height: 210px;
-        }
-
-        .card-button {
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-            width: 100%;
-            background-color: rgb(33, 80, 130);
-            color: #fff;
-            border-radius: 0 0 15px 15px;
-        }
-
-        .card-button:hover {
-            text-decoration: none;
-            background-color: #405683;
-            color: #fff;
-        }
-
-        h5 {
-            font-size: 18px;
-            color: #fff;
-        }
-
-        h6 {
-            font-size: 15px;
-            color: #fff;
-        }
-
-        .modal-details-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{% static 'katalog_pinjam_buku.css' %}">
 
     <body>
         <section>
@@ -110,6 +30,7 @@
                 </div>
             </div>
         </section>        
+        
         <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" style="background-color: rgb(22, 56, 105); color: #fff;">                    
