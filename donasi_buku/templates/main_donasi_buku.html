@@ -35,7 +35,24 @@
     </div>
 </div>
 
-<div class="container mt-5">
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Search</a>
+        <form class="d-flex" role="search">
+            <label class="form-label mx-2">Filter</label>
+            <select id="select" class="form-select" aria-label="Default select example">
+                <option selected value="0">Title</option>
+                <option value="1">Author</option>
+            </select>
+            <input id="search" class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
+            <button id="search_button" class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    <h3 class="mb-3">Books you've donated</h3>
+
     <div id="donation_list" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"></div>
 
     <div class="modal fade" id="modalDonation" tabindex="-1" aria-labelledby="modalDonationLabel" aria-hidden="true">
@@ -61,13 +78,81 @@
 </div>
 
 <script>
+    let filter = false
+
     async function getDonations() {
         return fetch("{% url 'donasi_buku:get_donations' %}").then((res) => res.json())
+    }
+
+    async function getDonationsFiltered() {
+        let selectOption = document.getElementById("select").value
+        let filter = document.getElementById("search").value.trim().replace(" ", "+")
+        if (selectOption == 0) {
+            return fetch("{% url 'donasi_buku:get_donations_by_book' 9999 %}".replace(9999, filter)).then((res) => res.json())
+        }
+        else {
+            return fetch("{% url 'donasi_buku:get_donations_by_author' 9999 %}".replace(9999, filter)).then((res) => res.json())
+        }
     }
 
     async function refreshDonations() {
         document.getElementById("donation_list").innerHTML = ""
         const donations = await getDonations()
+        let htmlString = ""
+        donations.forEach(element => {
+            let imgSrc = "{% static 'icon.png' %}"
+            if (element.fields.image_url !== "" && element.fields.image_url !== null) {
+                imgSrc = element.fields.image_url
+            }
+            console.log(imgSrc)
+            htmlString += `\n
+            <div class="col">
+                <div class="shadow bg-body rounded">
+                    <div class="card text-dark bg-light h-100">
+                        <div class="text-center p-3">
+                            <img src="${imgSrc}" style="object-fit: fill; width: 150px; height: 200px;" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center" style="margin-bottom: 1rem;">${element.fields.title}</h5>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <h6 class="card-title">Author</h6>
+                                    <p class="card-subtitle mb-2">${element.fields.author}</p>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <h6 class="card-title">Year</h6>
+                                    <p class="card-subtitle mb-2">${element.fields.year}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <h6 class="card-title">Donated on</h6>
+                                    <p class="card-subtitle mb-2">${element.fields.donation_date}</p>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <h6 class="card-title">Amount</h6>
+                                    <p class="card-subtitle mb-3">${element.fields.donation_amount} books</p>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col">
+                                    <button type="button" class="btn btn-primary" onclick=deleteDonation(${element.pk})>Cancel Donation</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Status: ${element.fields.status}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        });
+        document.getElementById("donation_list").innerHTML = htmlString
+    }
+
+    async function refreshDonationsFiltered() {
+        document.getElementById("donation_list").innerHTML = ""
+        const donations = await getDonationsFiltered()
         let htmlString = ""
         donations.forEach(element => {
             let imgSrc = "{% static 'icon.png' %}"
@@ -135,7 +220,13 @@
         return false
     }
 
+    function search() {
+        refreshDonationsFiltered()
+        return false
+    }
+
     refreshDonations()
     document.getElementById("button_add").onclick = addDonation
+    document.getElementById("search_button").onclick = search
 </script>
 {% endblock content %}
