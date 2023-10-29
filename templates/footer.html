@@ -8,14 +8,16 @@
             <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
                 <h3 class="fs-6">Services</h3>
                 <ul class="list-unstyled">
-                    <li><a class="link-secondary" href="#">Request Buku</a></li>
-                    <li><a class="link-secondary" href="#">Donasi Buku</a></li>
+                    <li><a class="link-secondary" href="{% url 'request_buku:status_request_buku' %}">Request Buku</a></li>
+                    <li><a class="link-secondary" href="{% url 'donasi_buku:donasi_buku_main' %}">Donasi Buku</a></li>
+                    <li><a class="link-secondary" href="{% url 'pinjam_buku:list_pinjam_buku' %}">List Pinjam Buku</a></li>
+                    <li><a class="link-secondary" href="{% url 'beli_buku:display_beli_buku' %}">List Beli Buku</a></li>
                 </ul>
             </div>
             <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
                 <h3 class="fs-6">About Us</h3>
                 <ul class="list-unstyled">
-                    <li><a class="link-secondary" href="#">Team</a></li>
+                    <li><a class="link-secondary" href="{% url 'request_buku:team' %}">Team</a></li>
                     <li></li>
                 </ul>
             </div>

@@ -9,6 +9,7 @@ class RequestBukuForm(ModelForm):
         fields = ['judul_buku', 'author', 'isi_buku', 'tahun_publikasi']
         widget = {
             'judul_buku': forms.TextInput(attrs={'class': 'form-control'}),
+            'isi_buku': forms.Textarea(attrs={'class': 'form-control'}),
             'author': forms.TextInput(attrs={'class': 'form-control'}),
             'tahun_publikasi': forms.NumberInput(attrs={'class': 'form-control'}),
         }
