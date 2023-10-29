@@ -2,9 +2,11 @@
 
 {% block content %}
 
+
 {% load static %}
     <link rel="stylesheet" href="{% static 'css/katalog_buku.css' %}">
-    <title>Product Card</title>
+
+    <title>Katalog Buku</title>
 
     <section>
         <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
@@ -13,7 +15,7 @@
                     <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                         <div style="max-width: 350px;">
                             <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Katalog Buku</h1>
-                            <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
+                            <p class="my-3" style="color: white;">Di Flex-lib kami menyediakan berbagai layanan buku seperti peminjaman, pembelian, pengajuan, dan juga donasi buku yang dapat dilakukan secara fleksibel (dimana saja kapan saja). </p>
                         </div>
                     </div>
                 </div>
@@ -37,13 +39,13 @@
                         <a class="nav-link active" href="{% url 'request_buku:status_request_buku' %}">Request Buku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'donasi_buku:donasi_buku_main' %}">Donasi Buku</a>
+                        <a class="nav-link active" href="{% url 'donasi_buku:donasi_buku_main' %}">Donasi Buku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'pinjam_buku:display_pinjam_buku' %}">Pinjam Buku</a>
+                        <a class="nav-link active" href="{% url 'pinjam_buku:display_pinjam_buku' %}">Pinjam Buku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'beli_buku:display_beli_buku' %}">Beli Buku</a>
+                        <a class="nav-link active" href="{% url 'beli_buku:display_beli_buku' %}">Beli Buku</a>
                     </li>
                 </ul>
             </div>
