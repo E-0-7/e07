@@ -24,5 +24,5 @@ urlpatterns = [
     path('katalog_buku/', include('katalog_buku.urls'), name="katalog_buku"),
     path("pinjam_buku/", include("pinjam_buku.urls"), name="pinjam_buku"),
     path('', include('katalog_buku.urls'), name="katalog_buku"),
-    path('auth/', include('register.urls')),
+    path('auth/', include('register.urls'), name="auth"),
 ]
