@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <title>Beli Buku</title>
+
+    <style>
+        body, h1, p, a, input, label, button {
+            font-family: 'Publica Sans', sans-serif;
+        }
+
+        body {
+            background-color: rgb(11, 31, 73);
+        }
+
+        .card {
+            background-color: rgb(22, 56, 105);
+            margin-left: 0;
+            margin-right: 0;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
+        }
+
+        .rounded-card {
+            border-radius: 15px !important;
+        }
+    
+        .card-fixed-height {
+            height: 500px;
+            display: flex;
+            flex-direction: row;
+        }
+    
+        .card-fixed-height .card-body {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .card-fixed-width {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #foto_form {
+            width: 140px;
+            height: 210px;
+        }
+
+        .card-button {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            width: 100%;
+            background-color: rgb(33, 80, 130);
+            color: #fff;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .card-button:hover {
+            text-decoration: none;
+            background-color: #405683;
+            color: #fff;
+        }
+
+        h5 {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        h6 {
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .modal-details-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .card-text-price {
+            border: 1px solid #fff; /* Tambahkan border */
+            border-radius: 5px; /* Tambahkan sudut lengkung pada border */
+            padding: 10px; /* Berikan jarak antara teks dan border */
+            text-align: center; /* Pusatkan teks dalam frame */
+            margin-top: 10px; /* Tambahkan jarak atas antara elemen harga buku dengan elemen sebelumnya */
+            margin-bottom: 8px;
+        }
+
+
+    </style>
+
+    <body>
+        <section>
+            <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-image: url(https://images.alphacoders.com/132/1326370.png); background-position: center; background-size: cover;"></div>
+        
+            <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-color: rgba(0, 0, 0, 0.5);"></div>
+        
+            <div style="position: relative; height: 100vh;">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                            <div style="max-width: 350px;">
+                                <h1 class="fw-bold" style="color: white;">Flex-Lib<br>Beli Buku</h1>
+                                <h5 class="my-3" style="color: white; font-size: 16px;">Di Flex-lib, kamu dapat meminjam buku. Kami akan memproses peminjaman buku kamu dan memberikan buku tersebut jika tersedia.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: rgb(22, 56, 105); color: #fff;">                    
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Beli Buku</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="container" style="margin-top: 10px;">                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="modal-details-content">                                        
+                                        <img id="foto_form"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="modal-details-content fw-bold">                                        
+                                        <p id="judul_form"></p>
+                                        <p id="penulis_form"></p>
+                                        <p id="tahun_form"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <form id="form" onsubmit="return false;">                                    
+                                    {% csrf_token %}
+                                    <div class="mb-3" style="margin-bottom: 22px;">
+                                        <label class="col-form-label">
+                                            Jumlah Buku
+                                        </label>
+                                        <div style="display:block">
+                                            <input type="number" class="form-control" id="jumlah_buku" name="jumlah_buku" placeholder="Jumlah Buku"></input>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-1form-label">
+                                            Nomor Telepon
+                                        </label>
+                                        <div style="display:block">
+                                            <input type="number" class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="08XXXXXXXXXX"></input>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-1form-label">
+                                            Alamat
+                                        </label>
+                                        <div style="display:block">
+                                            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" style="margin-bottom: 24px;">
+                                        <label class="col-form-label">Metode Pembayaran</label>
+                                        <div style="display:block">
+                                            <select class="form-select" id="metode_pembayaran" name="metode_pembayaran">
+                                                <option value="COD">COD (Cash on Delivery)</option>
+                                                <option value="CARD">Credit/Debit Card</option>
+                                                <option value="E-WALLET">E-Wallet</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal" onclick="addBeliBuku()">Beli</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg" style="background-color: rgb(22, 56, 105);">
+            <div class="container-fluid" style="margin-left:60px; margin-right:60px;">      
+                <a class="navbar-brand fw-bold text-white">Daftar Buku</a>
+                <a class="btn btn-primary btn-lg me-2" role="button" href="{% url 'beli_buku:list_beli_buku' %}">History Pembelian</a>
+            </div>
+        </nav>
+
+        <div class="container" style="margin-top: 30px;">
+            <div class="row">
+                <input type="hidden" id="book_id" name="book_id">
+                {% for data_buku in buku %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">                        
+                    <div class="card text-white mb-4 shadow-sm rounded-card card-fixed-height card-fixed-width">
+                        <img class="card-img-top" alt="Thumbnail [200x300]" src="{{data_buku.url_foto_large}}" style="width: 100%; height: 300px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h4 class="card-text mb-1 text-center fw-bold">{{ data_buku.book_title }}</h4>
+                                <h6 class="card-text mb-1 text-center fw-bold">by {{ data_buku.book_author }} ({{ data_buku.tahun_publikasi}})</h6>
+                                <h6 class="card-text mb-1 text-center fw-bold">Published by {{data_buku.penerbit}}</h6>
+                            </div>
+                        </div>
+                        <a class="btn btn-md me-2 beli-btn card-button" role="button" data-bs-toggle="modal" data-bs-target="#requestModal"                                 
+                        data-image="{{data_buku.url_foto_large}}"
+                        data-id="{{data_buku.id}}" 
+                        data-title="{{ data_buku.book_title }}" 
+                        data-author="{{ data_buku.book_author }}" 
+                        data-price="{{ data_buku.book_price }}" 
+                        data-year="{{ data_buku.tahun_publikasi }}">BUY Rp{{ data_buku.book_price }}</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let beliButtons = document.querySelectorAll('.beli-btn');
+
+                beliButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        let bookId = button.getAttribute('data-id');
+                        let bookTitle = button.getAttribute('data-title');
+                        let bookAuthor = button.getAttribute('data-author');
+                        let bookYear = button.getAttribute('data-year');
+                        let bookImage = button.getAttribute('data-image');
+                        let bookPrice = button.getAttribute('data-price');
+
+                        document.getElementById('book_id').value = bookId;
+
+                        let modal = document.getElementById('requestModal');
+                        modal.querySelector('#foto_form').src = bookImage;
+                        modal.querySelector('#judul_form').textContent = bookTitle;
+                        modal.querySelector('#penulis_form').textContent = bookAuthor;
+                        modal.querySelector('#tahun_form').textContent = bookYear;
+                        modal.querySelector('#price_form').textContent = bookPrice;
+                        
+                        document.getElementById("form").reset();
+                    });
+                });
+            });
+
+            async function addBeliBuku() {
+                let buku_id = document.getElementById('book_id').value;
+                fetch(`add_beli_buku_ajax/${buku_id}`, {
+                    method: "POST",
+                    body: new FormData(document.getElementById("form")),
+                }).then(refreshKatalog());
+
+                return false
+            }
+
+            refreshKatalog()
+        </script>
+    </body>
+</html>
+
+{% endblock content %}

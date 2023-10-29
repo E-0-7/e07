@@ -27,7 +27,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    response = HttpResponseRedirect(reverse('register:login'))
+    response = HttpResponseRedirect(reverse('katalog_buku:get'))
     return response
 
 def register(request):
