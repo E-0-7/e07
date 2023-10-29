@@ -14,16 +14,20 @@
             font-family: 'Publica Sans', sans-serif;
         }
 
+        body {
+            background-color: rgb(11, 31, 73);
+        }
+
         .card {
-            background-color: #1F487E; /* Dark Blue */
+            background-color: rgb(22, 56, 105);
             margin-left: 0;
             margin-right: 0;
-            transition: transform 0.3s; /* Smooth transition for scaling */
+            transition: transform 0.3s;
         }
 
         .card:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transform: scale(1.05); /* Enlarge the card by 5% when hovered */
+            transform: scale(1.05);
         }
 
         .rounded-card {
@@ -31,7 +35,7 @@
         }
     
         .card-fixed-height {
-            height: 500px; /* Adjust as needed */
+            height: 500px;
             display: flex;
             flex-direction: row;
         }
@@ -42,21 +46,27 @@
         }
 
         .card-fixed-width {
-            width: 250px; /* Adjust as needed */
+            width: 250px;
             display: flex;
             flex-direction: column;
         }
     
         #item_view {
-            margin-top: 30px;  /* Atur sesuai kebutuhan Anda */
+            margin-top: 30px;
         }
 
-        #foto_form {
-            width: 140px;
-            height: 210px;
-            /* align-items: center;
-            justify-content: center;
-            text-align: center; */
+        h5 {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        h6 {
+            font-size: 15px;
+            color: #fff;
+        }
+
+        p {
+            font-size: 14px;
         }
     </style>
 
@@ -71,82 +81,23 @@
                     <div class="row h-100">
                         <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                             <div style="max-width: 350px;">
-                                <h1 class="fw-bold" style="color: white;">Flex-Lib<br>Pinjam Buku</h1>
-                                <p class="my-3" style="color: white;">Di Flex-lib, kamu dapat meminjam buku. Kami akan memproses peminjaman buku kamu dan memberikan buku tersebut jika tersedia.</p>
+                                <h1 class="fw-bold" style="color: white;">Flex-Lib<br>List Pinjam Buku</h1>
+                                <h5 class="my-3" style="color: white; font-size: 16px;">Berikut adalah daftar buku yang telah kamu pinjam dari Flex-Lib. Pastikan untuk mengembalikan buku tepat waktu dan menikmati pembacaanmu!</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>        
-        <!-- <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pinjam Buku</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col"><img id="foto_form" src="http://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg"/></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <p>Judul Buku</p>
-                                        <p>Penulis</p>
-                                        <p>Tahun publikasi</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <form id="form" onsubmit="return false;">                                    
-                                    {% csrf_token %}
-                                    <div class="mb-3" style="margin-bottom: 22px;">
-                                        <label class="col-form-label">
-                                            Duration (day)
-                                        </label>
-                                        <div style="display:block">
-                                            <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Duration (day)"></input>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3" style="margin-bottom: 24px;">
-                                        <label class="col-1form-label">
-                                            Phone Number
-                                        </label>
-                                        <div style="display:block">
-                                            <input type="number" class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="08XXXXXXXXXX"></input>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3" style="margin-bottom: 24px;">
-                                        <label class="col-1form-label">
-                                            Shipping Address
-                                        </label>
-                                        <div style="display:block">
-                                            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Shipping Address"></textarea>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Tambah Pinjam</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
+
+        <nav class="navbar navbar-expand-lg" style="background-color: rgb(22, 56, 105);">
             <div class="container-fluid" style="margin-left:60px; margin-right:60px;">      
-                <a class="navbar-brand fw-bold">Daftar Buku</a>
+                <a class="navbar-brand fw-bold text-white">Daftar Buku Dipinjam</a>
                 <a class="btn btn-primary btn-lg me-2" role="button" href="{% url 'pinjam_buku:display_pinjam_buku' %}">Pinjam Buku</a>
             </div>
         </nav>
 
         <div id="item_view"></div>
-        <!-- <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Pinjam Buku Sekarang</a> -->
 
         <script>
             async function getPinjamBuku() {
@@ -156,7 +107,7 @@
             async function refreshPinjam() {
                 document.getElementById("item_view").innerHTML = "";
                 const pinjamBuku = await getPinjamBuku();
-                let htmlString = '<div class="container"><div class="row">'; // Mulai container dan row di sini
+                let htmlString = '<div class="container"><div class="row">';
 
                 pinjamBuku.forEach((request) => {
                     htmlString += `
@@ -179,7 +130,7 @@
                         </div>
                     </div>`;
                 });
-                htmlString += '</div></div>'; // Tutup container dan row di sini
+                htmlString += '</div></div>';
                 document.getElementById("item_view").innerHTML = htmlString;
             }
             refreshPinjam();
