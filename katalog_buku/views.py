@@ -12,15 +12,27 @@ def get_books(request):
 
 def get(request):
     all_product = Buku.objects.all()
-    context = {'buku': all_product}
-    
+    context = {'buku':all_product}
     if request.user.is_authenticated:
+        context = {
+            'buku': all_product,
+            'login_user': request.user
+            }
         if request.user.username != "pustakawan":
-            return render(request, 'katalog_pustakawan.html', context)
-        else:
-            return render(request, 'katalog_pustakawan.html', context)
-    else:
-        return render(request, 'katalog_buku.html', context)
+            return render(request,'katalog_users.html', context)
+        if request.user.username == "pustakawan":
+            return render(request,'katalog_pustakawan.html', context)
+    return render(request,'katalog_buku.html', context)
+
+def search(request):
+    buku_dicari = request.GET.get('search')
+    print("buku_dicari: ", buku_dicari)
+    if buku_dicari:
+        hasil_buku = Buku.objects.filter(Q(book_title__icontains=buku_dicari) | Q(book_author__icontains=buku_dicari) | Q(penerbit__icontains=buku_dicari) | Q(tahun_publikasi__icontains=buku_dicari))
+
+        context = {'buku': hasil_buku}
+
+        return render(request, 'search_buku.html', context)
 
 @csrf_exempt
 def add_product_ajax(request):
