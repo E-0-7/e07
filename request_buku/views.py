@@ -14,6 +14,7 @@ from django.forms.models import model_to_dict
 from django.contrib import messages
 
 # Create your views here.
+@login_required(login_url='register:login')
 def status_request_buku(request):
     user = request.user
 
@@ -49,20 +50,6 @@ def add_request_buku_view(request):
     
     context = {"form": form}
     return render(request, 'add_request_buku.html', context)
-
-
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request=request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('request_buku:status_request_buku')
-        else:
-            messages.info(request, 'Username atau password salah')
-    context = {}
-    return render(request, 'login.html', context)
 
 def json_format(request):
     user = request.user
@@ -133,24 +120,21 @@ def delete_request_buku_ajax(request, id):
         except StatusRequest.DoesNotExist:
             return HttpResponse({'error': 'Item not found'}, status=404)
 
-def filter_data_by_judul_buku(request):
-    user = request.user
-    status_requests = StatusRequest.objects.filter(buku__user=user).order_by('buku__judul_buku')
-    data = []
-    
-    for status_request in status_requests:
-        request_buku = status_request.buku
-        request_buku_dict = model_to_dict(request_buku)
-        request_buku_dict['status'] = status_request.status
+def team(request):
+    return render(request, 'team.html')
 
-        request_date = status_request.buku.tanggal_request
+def search(request):
+    search_query = request.GET.get('search')
+    if search_query:
+        status_requests = StatusRequest.objects.filter(buku__user=request.user, buku__judul_buku__icontains=search_query)
 
-        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
-        data.append(request_buku_dict)
-    
-    json_data = json.dumps(data)
-    
-    return HttpResponse(json_data, content_type='application/json')
+        context = {
+            'login_user': request.user,
+            'status_requests': status_requests,
+        }
+
+        return render(request, 'search.html', context)
+
 
 def pending_request(request):
     status_requests = StatusRequest.objects.filter(buku__user=request.user, status='PENDING')
@@ -190,25 +174,6 @@ def diterima_request(request):
 
 def ditolak_request(request):
     status_requests = StatusRequest.objects.filter(buku__user=request.user, status='DITOLAK')
-    data = []
-    
-    for status_request in status_requests:
-        request_buku = status_request.buku
-        request_buku_dict = model_to_dict(request_buku)
-        request_buku_dict['status'] = status_request.status
-
-        request_date = status_request.buku.tanggal_request
-
-        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
-        data.append(request_buku_dict)
-    
-    json_data = json.dumps(data)
-    
-    return HttpResponse(json_data, content_type='application/json')
-
-def filter_data_by_author(request):
-    user = request.user
-    status_requests = StatusRequest.objects.filter(buku__user=user).order_by('buku__author')
     data = []
     
     for status_request in status_requests:

@@ -2,99 +2,21 @@
 
 {% block content %}
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;700&display=swap');
 
-        * {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/katalog_buku.css' %}">
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0; 
-        }
-
-        #main-container {
-            width: 1440px;
-            max-width: 100%;
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: center; 
-            padding: 10px; 
-        }
-
-        .card-container {
-            width: 300px; 
-            background-color: aliceblue;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            border: 1px solid #ddd; 
-            margin: 10px; 
-            padding: 10px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-        }
-
-        img {
-            width: 177px;
-            height: 217px;
-            border-radius: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .card-detail {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 200px;
-            margin-top: 10px; 
-        }
-        button {
-            font-size: small;
-            color: #edf0f1;
-            padding: 9px 25px;
-            background-color: rgba(0,136,169,1);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease 0s;
-        }
-        button:hover {
-            background-color: rgba(0,136,169,0.8);
-        }
-    </style>
     <title>Katalog Buku</title>
 
+
     <section>
-        <div style="opacity: 1; height: 600px;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
+        <div style="opacity: 1; height: 100vh;background-image: url(https://images.alphacoders.com/132/1326370.png);background-position: center;background-size: cover;">
             <div class="container h-100">
                 <div class="row h-100">
                     <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                         <div style="max-width: 350px;">
-                            <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Request Buku</h1>
+                            <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Katalog Buku</h1>
                             <p class="my-3" style="color: white;">Di Flex-lib kamu dapat melakukan permintaan buku atau request buku. Kami akan menerima request buku kamu dan memutuskan apakah buku yang di kamu minta akan kami tambahkan. </p>
-                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal" data-bs-target="#requestModal">Request Buku Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -102,18 +24,137 @@
         </div>
     </section>
 
-    <a href="">
-        <button>
-        Add New Product
-        </button>
-    </a>    
-    <a href="">
-        <button>
-        Manage Products
-        </button>
-    </a>
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container">
+            
+            <form method="get" action="{% url 'katalog_buku:search' %}">
+                <input type="text" name="search" id="search" placeholder="Search" />
+            </form>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-3">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navcol-3" class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'request_buku:status_request_buku' %}">Request Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'donasi_buku:donasi_buku_main' %}">Donasi Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pinjam_buku:display_pinjam_buku' %}">Pinjam Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'beli_buku:display_beli_buku' %}">Beli Buku</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     
     <div id="main-container"></div>
+
+
+    <div class="container-fluid d-flex flex-column align-items-center py-4 py-xl-5" style="margin-top: 50px">
+        <div class="row gy-4 w-100" style="max-width: 800px;">
+            <div class="col-12">
+                <div class="card"><img class="card-img w-100 d-block" src="https://media.istockphoto.com/id/1440541516/photo/open-book-in-hardcover-on-a-white-background.webp?b=1&s=170667a&w=0&k=20&c=5lOgqBkmKE0xrpd5LvFfV78aStkswFmjJe-TNuK91Z0=" style="opacity:0.5;"  />
+                    <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                        <h4>The great thing about books is there are no commercials.</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card"><img class="card-img w-100 d-block" src="https://www.sodapdf.com/blog/wp-content/uploads/2018/09/blog_free-eBook-downloads-thumbnail.jpg" style="opacity:0.5;"  />
+                    <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                        <h4>That's the thing about books. They let you travel without moving feet.</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card"><img class="card-img w-100 d-block" src="https://img.freepik.com/premium-vector/online-reading-web-concept-3d-isometric-design-woman-reading-ebook-from-mobile-app-using-virtual-library-buying-internet-bookstore-vector-web-illustration-with-people-isometry-scene_9209-10113.jpg?size=626&ext=jpg&ga=GA1.1.1413502914.1697328000&semt=ais" style="opacity:0.5;" />
+                    <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center p-4">
+                        <h4>A reader lives thousand lives before he dies.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-4 py-xl-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2>Testimonials</h2>
+            </div>
+        </div>
+        <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+            <div class="col">
+                <div>
+                    <p class="bg-body-tertiary border rounded border-0 p-4">Saya suka sekali aplikasi ini karena memiliki koleksi buku yang lengkap dan beragam. Saya bisa menemukan buku-buku yang saya cari dengan mudah. Selain itu, aplikasi ini juga mudah digunakan dan nyaman untuk membaca buku. Saya sangat merekomendasikan aplikasi ini untuk para pecinta buku.</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" style="width:50px; height:50px;"  src="https://tr.rbxcdn.com/54148d6eef670226565d3f0ee2e11605/420/420/Hat/Png" />
+                        <div>
+                            <p class="fw-bold text-primary mb-0">Joe Mama</p>
+                            <p class="text-muted mb-0">Pengguna Setia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <p class="bg-body-tertiary border rounded border-0 p-4">Aplikasi ini sangat membantu saya untuk menemukan buku-buku baru yang menarik. Saya bisa melihat buku-buku yang sedang populer atau yang baru terbit. Selain itu, saya juga bisa merequest buku yang tidak tersedia di aplikasi. Saya sangat puas dengan layanan aplikasi ini.</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" style="width:50px; height:50px;"  src="https://i.pinimg.com/1200x/72/f3/64/72f36471025bebbc19c1059178eca642.jpg" />
+                        <div>
+                            <p class="fw-bold text-primary mb-0">Mama Mia</p>
+                            <p class="text-muted mb-0">Pengguna Setia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <p class="bg-body-tertiary border rounded border-0 p-4">Aplikasi ini sangat memudahkan saya untuk meminjam buku. Saya bisa meminjam buku dengan mudah dan cepat. Selain itu, saya juga bisa mengembalikan buku dengan mudah. Saya sangat senang menggunakan aplikasi ini.</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" style="width:50px; height:50px;" src="https://tr.rbxcdn.com/aae4309dbae2a920d39f3a6642d75251/420/420/Hat/Png" />
+                        <div>
+                            <p class="fw-bold text-primary mb-0">Wilson Lo Siento</p>
+                            <p class="text-muted mb-0">Penulis Buku</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-4 py-xl-5">
+        <div class="text-center text-white-50 bg-primary border rounded border-0 p-3" style="background-color: inherit; color: black;">
+            <div class="row row-cols-2 row-cols-md-4">
+                <div class="col">
+                    <div class="p-3">
+                        <h4 class="display-5 fw-bold text-white mb-0">5+</h4>
+                        <p class="mb-0">Pengguna</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3">
+                        <h4 class="display-5 fw-bold text-white mb-0">100+</h4>
+                        <p class="mb-0">Buku</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3">
+                        <h4 class="display-5 fw-bold text-white mb-0">100+</h4>
+                        <p class="mb-0">Kunjungan Website</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3">
+                        <h4 class="display-5 fw-bold text-white mb-0">5</h4>
+                        <p class="mb-0">Fitur untuk Pengguna</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script>
     async function getProducts() {

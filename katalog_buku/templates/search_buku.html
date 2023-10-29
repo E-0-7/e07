@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/katalog_buku.css' %}">
+
+    <h1 style="margin-top: 40px; margin-bottom: 40px;">Search Result</h1>
+    {% if buku %}
+        <div class="container">
+            <div class="row">
+            {% for data_buku in buku %}
+                <div class="card-container">
+                    <img src={{ data_buku.url_foto_large }} alt="Foto Not Found">
+                    <div class="card-detail">
+                        <div class="title">
+                            <p>{{ data_buku.book_title }}</p>
+                            <p>{{ data_buku.book_author }}</p>
+                            <p>{{ data_buku.tahun_publikasi }}</p>
+                            <p>{{ data_buku.penerbit }}</p>
+                            <p>Rp {{ data_buku.book_price }}</p>
+                        </div>   
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p>No results found</p>
+    {% endif %}
+
+{% endblock content %}
