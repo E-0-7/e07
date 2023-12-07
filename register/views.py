@@ -13,6 +13,7 @@ from katalog_buku.views import get
 from request_buku.views import status_request_buku
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def login_user(request):
@@ -44,7 +45,7 @@ def register(request):
     context = { 'form':form }
     return render(request, 'register.html', context)
 
-
+@csrf_exempt
 def login_flutter(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -72,7 +73,7 @@ def login_flutter(request):
         }, status=401)
     
 
-
+@csrf_exempt
 def logout_flutter(request):
     username = request.user.username
 
