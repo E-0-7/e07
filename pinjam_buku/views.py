@@ -79,3 +79,22 @@ def add_pinjam_buku_ajax(request, id):
 
         return HttpResponse("Created", status=201)
     return HttpResponse("Not Created", status=400)
+
+@csrf_exempt
+def create_pinjam_buku(request, id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        
+        new_pinjam = PinjamBuku.objects.create(
+            user = request.user,
+            buku = get_object_or_404(Buku, pk = id),
+            durasi = int(data["durasi"]),
+            nomor_telepon = int(data["nomor_telepon"]),
+            alamat = data["alamat"],
+        )
+
+        new_pinjam.save()
+        return HttpResponse("Created", status=201)
+    else :
+        return HttpResponse("Not Created", status=400)
+
