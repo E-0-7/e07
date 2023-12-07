@@ -162,6 +162,7 @@ def get_request_status(request):
     
     return HttpResponse(serializers.serialize('json', status_requests), content_type='application/json')
 
+@csrf_exempt
 def create_request_buku(request):
     if request.method == 'POST':
             
@@ -176,20 +177,7 @@ def create_request_buku(request):
             tanggal_request = date.today()
         )
 
-        request_status = RequestStatusBuku(
-            user = request.user,
-            judul_buku = data["judul_buku"],
-            author = data["author"],
-            tahun_publikasi = int(data["tahun_publikasi"]),
-            isi_buku = data["deskripsi"],
-            tanggal_request = date.today(),
-            status = 'PENDING'
-        )
-        request_status.save()
-
-
         new_request.save()
-
         status_buku = StatusRequest(buku=new_request, status='PENDING')
         status_buku.save()
 
