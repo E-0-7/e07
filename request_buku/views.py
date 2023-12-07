@@ -92,7 +92,7 @@ def get_status_json(request):
     
 
 def get_request_data(request):
-    status_requests = StatusRequest.objects.filter(buku__user=request.user)
+    status_requests = StatusRequest.objects.all()
 
     data = []
     
@@ -172,7 +172,7 @@ def create_request_buku(request):
             judul_buku = data["judul_buku"],
             author = data["author"],
             tahun_publikasi = int(data["tahun_publikasi"]),
-            isi_buku = data["isi_buku"],
+            isi_buku = data["deskripsi"],
             tanggal_request = date.today()
         )
 
@@ -181,7 +181,7 @@ def create_request_buku(request):
             judul_buku = data["judul_buku"],
             author = data["author"],
             tahun_publikasi = int(data["tahun_publikasi"]),
-            isi_buku = data["isi_buku"],
+            isi_buku = data["deskripsi"],
             tanggal_request = date.today(),
             status = 'PENDING'
         )

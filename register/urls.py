@@ -6,7 +6,9 @@ from django.urls import path
 app_name="register"
 
 urlpatterns = [
-    path('login/', login_flutter, name='login'),
-    path('logout/', logout_flutter, name='logout'),
+    path('login_flutter/', login_flutter, name='login'),
+    path('logout_flutter/', logout_flutter, name='logout'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
     path('register/', register, name='register'),
 ]
