@@ -98,3 +98,8 @@ def create_pinjam_buku(request, id):
     else :
         return HttpResponse("Not Created", status=400)
 
+def get_pinjam_buku(request):
+    pinjam_buku = PinjamBuku.objects.all()
+
+    return HttpResponse(serializers.serialize('json', pinjam_buku), content_type='application/json')
+

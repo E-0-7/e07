@@ -93,6 +93,10 @@ def get_status_json(request):
 
 def get_request_data(request):
     status_requests = StatusRequest.objects.all()
+    if(request.user.is_authenticated) :
+        status_requests = StatusRequest.objects.filter(buku__user=request.user)
+
+    print(request.user.is_authenticated)
 
     data = []
     
@@ -142,6 +146,24 @@ def delete_request_buku_ajax(request, id):
 def team(request):
     return render(request, 'team.html')
 
+def search_request(request, title):
+    status_request_buku = StatusRequest.objects.filter(buku__user=request.user, buku__judul_buku__icontains=title)
+    data = []
+
+    for status_request in status_request_buku:
+        request_buku = status_request.buku
+        request_buku_dict = model_to_dict(request_buku)
+        request_buku_dict['status'] = status_request.status
+
+        request_date = status_request.buku.tanggal_request
+
+        request_buku_dict['tanggal_request'] = request_date.strftime("%b. %d, %Y") 
+        data.append(request_buku_dict)
+
+    json_data = json.dumps(data)
+
+    return HttpResponse(serializers.serialize('json', json_data), content_type='application/json')
+
 def search(request):
     search_query = request.GET.get('search')
     if search_query:
@@ -181,16 +203,18 @@ def create_request_buku(request):
         status_buku = StatusRequest(buku=new_request, status='PENDING')
         status_buku.save()
 
-        
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
 
 @csrf_exempt
-def delete_request_buku(request, id):
+def delete_request_buku(request):
     if request.method == "POST":
+
+        data = json.loads(request.body)
+
         try:
-            item = get_object_or_404(RequestBuku, pk=id)
+            item = data["hapus"]
             item.delete()
             return HttpResponse("Deleted", status=200)
         except RequestBuku.DoesNotExist:
