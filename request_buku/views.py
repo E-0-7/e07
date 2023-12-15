@@ -208,19 +208,33 @@ def create_request_buku(request):
         return JsonResponse({"status": "error"}, status=401)
 
 @csrf_exempt
-def delete_request_buku(request):
+def delete_request_buku(request, id):
     if request.method == "POST":
-
+        try:
+            item = RequestBuku.objects.get(pk=id)
+            item.delete()
+            return JsonResponse({"status": "success"}, status=200)
+        except RequestBuku.DoesNotExist:
+            return JsonResponse({"status": "error"}, status=404)
+        except StatusRequest.DoesNotExist:
+            return JsonResponse({"status": "error"}, status=404)
+        
+@csrf_exempt
+def change_status(request):
+    if request.method == "POST":
         data = json.loads(request.body)
 
         try:
-            item = data["hapus"]
-            item.delete()
-            return HttpResponse("Deleted", status=200)
+            item = StatusRequest.objects.get(pk=int(data["id_buku"]))
+            item.status = data["status"]
+            item.save()
+            return JsonResponse({"status": "success"}, status=200)
         except RequestBuku.DoesNotExist:
-            return HttpResponse({'error': 'Item not found'}, status=404)
+            return JsonResponse({"status": "error"}, status=404)
         except StatusRequest.DoesNotExist:
-            return HttpResponse({'error': 'Item not found'}, status=404)
+            return JsonResponse({"status": "error"}, status=404)
 
+
+            
 
 
