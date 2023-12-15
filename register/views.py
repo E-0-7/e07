@@ -53,15 +53,18 @@ def login_flutter(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
+
             # Status login sukses.
             return JsonResponse({
                 "username": user.username,
                 "status": True,
-                "message": "Login sukses!"
+                "message": "Login sukses!",
+                "is_login": True,
                 # Tambahkan data lainnya jika ingin mengirim data ke Flutter.
             }, status=200)
         else:
             return JsonResponse({
+                "is_login": False,
                 "status": False,
                 "message": "Login gagal, akun dinonaktifkan."
             }, status=401)

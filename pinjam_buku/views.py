@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import PinjamBuku
 from .forms import PinjamFormByID
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from katalog_buku.models import Buku
 from django.shortcuts import get_object_or_404
@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
 from django.core import serializers
 import json
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 def list_pinjam_buku(request):
@@ -42,10 +44,9 @@ def display_pinjam_buku(request):
         }
         return render(request,'katalog_pinjam_buku.html', context)
 
-@csrf_exempt
 def get_pinjam_data_ajax(request):
     user = request.user
-    pinjam_buku = PinjamBuku.objects.filter(user=user)
+    pinjam_buku = PinjamBuku.objects.all()
     if user.is_authenticated:
         if request.user == "pustakawan":
             pinjam_buku = PinjamBuku.objects.all()
@@ -81,20 +82,28 @@ def add_pinjam_buku_ajax(request, id):
     return HttpResponse("Not Created", status=400)
 
 @csrf_exempt
-def create_pinjam_buku(request, id):
+def create_pinjam_buku(request):
     if request.method == "POST":
         data = json.loads(request.body)
+        buku_ambil = Buku.objects.get(pk=int(data["buku"]))
+        
+        # user, created = User.objects.get_or_create(username="john", defaults={"email": "lennon@thebeatles.com", "password": "johnpassword"})
         
         new_pinjam = PinjamBuku.objects.create(
             user = request.user,
-            buku = get_object_or_404(Buku, pk = id),
+            buku = buku_ambil,
             durasi = int(data["durasi"]),
             nomor_telepon = int(data["nomor_telepon"]),
             alamat = data["alamat"],
         )
 
         new_pinjam.save()
-        return HttpResponse("Created", status=201)
-    else :
-        return HttpResponse("Not Created", status=400)
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
+
+def get_pinjam_buku(request):
+    pinjam_buku = PinjamBuku.objects.all()
+
+    return HttpResponse(serializers.serialize('json', pinjam_buku), content_type='application/json')
