@@ -2,7 +2,7 @@ from django.urls import path
 from .views import status_request_buku, add_request_buku_view, add_request_buku_ajax, get_request_data
 from .views import json_format, get_request_status
 from .views import delete_request_buku_ajax, search, team, create_request_buku, get_request_json
-from .views import get_status_json, delete_request_buku, change_status, search_status
+from .views import get_status_json, delete_request_buku, change_status
 
 app_name = 'request_buku'
 
@@ -21,5 +21,5 @@ urlpatterns = [
     path('get_request_status/', get_request_status, name='get_request_status'),
     path('delete_request_buku_flutter/<int:id>', delete_request_buku, name='delete_request_buku'),
     path('change_status/', change_status, name='change_status'),
-    path('search_status/', search_status, name='search_status'),
+  
 ]
