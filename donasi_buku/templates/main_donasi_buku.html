@@ -17,25 +17,49 @@
 {% endblock meta %}
 
 {% block content %}
-<div style="opacity: 1; height: 600px;background-image: url({% static 'library_background.png' %});background-position: center;background-size: cover;">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div
-                class="col-sm-12 col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-                <div style="max-width: 350px;">
-                    <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Donasi Buku</h1>
-                    <p class="my-3" style="color: white;">Di Flex-lib kamu dapat mendonasikan buku-bukumu yang sudah
-                        tidak dipakai lagi. Dengan bantuanmu, katalog buku Flex-lib dapat menjadi semakin luas dan
-                        lengkap.</p>
-                    <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal"
-                        data-bs-target="#modalDonation">Donasi Buku Sekarang</a>
+<section>
+    <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-image: url(https://images.alphacoders.com/132/1326370.png); background-position: center; background-size: cover;"></div>
+
+    <div style="position: absolute; top: 55px; left: 0; right: 0; bottom: 0; height: 100vh; background-color: rgba(0, 0, 0, 0.5);"></div>
+
+    <div style="position: relative; height: 100vh;">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                    <div style="max-width: 350px;">
+                        <h1 class="text-uppercase fw-bold" style="color: white;">Flex-Lib<br>Donasi Buku</h1>
+                        <p class="my-3" style="color: white;">Di Flex-lib kamu dapat mendonasikan buku-bukumu yang sudah
+                            tidak dipakai lagi. Dengan bantuanmu, katalog buku Flex-lib dapat menjadi semakin luas dan
+                            lengkap.</p>
+                            <a class="btn btn-primary btn-lg me-2" role="button" data-bs-toggle="modal"
+                            data-bs-target="#modalDonation">Donasi Buku Sekarang</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>   
 
-<div class="container mt-5">
+
+
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Search</a>
+        <form class="d-flex" role="search">
+            <label class="form-label mx-2">Filter</label>
+            <select id="select" class="form-select" aria-label="Default select example">
+                <option selected value="0">Title</option>
+                <option value="1">Author</option>
+            </select>
+            <input id="search" class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
+            <button id="search_button" class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    <h3 class="mb-3">Books you've donated</h3>
+
     <div id="donation_list" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"></div>
 
     <div class="modal fade" id="modalDonation" tabindex="-1" aria-labelledby="modalDonationLabel" aria-hidden="true">
@@ -62,8 +86,21 @@
 
 <script>
     async function getDonations() {
-        return fetch("{% url 'donasi_buku:get_donations' %}").then((res) => res.json())
+        let selectOption = document.getElementById("select").value
+        let filter = document.getElementById("search").value.trim().replace(" ", "+")
+        if (filter !== "") {
+            if (selectOption == 0) {
+                return fetch("{% url 'donasi_buku:get_donations_by_book' 9999 %}".replace(9999, filter)).then((res) => res.json())
+            }
+            else {
+                return fetch("{% url 'donasi_buku:get_donations_by_author' 9999 %}".replace(9999, filter)).then((res) => res.json())
+            }
+        }
+        else {
+            return fetch("{% url 'donasi_buku:get_donations' %}").then((res) => res.json())
+        }
     }
+
 
     async function refreshDonations() {
         document.getElementById("donation_list").innerHTML = ""
@@ -135,7 +172,13 @@
         return false
     }
 
+    function search() {
+        refreshDonations()
+        return false
+    }
+
     refreshDonations()
     document.getElementById("button_add").onclick = addDonation
+    document.getElementById("search_button").onclick = search
 </script>
 {% endblock content %}

@@ -7,31 +7,7 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
-def donasi_buku_form(request):
-    if request.method == "POST":
-        name = request.POST["name"]
-        title = request.POST["title"]
-        author = request.POST["author"]
-        year = request.POST["year"]
-        edition = request.POST["edition"]
-        donation_amount = request.POST["amount"]
-        image_url = request.POST["imageUrl"]
-
-        book = Buku.objects.filter(book_title=title)
-        if not book.exists():
-            book = Buku(book_title=title, image=image_url, penulis=author, tahun_terbit=year, jumlah=0)
-        else:
-            book = book[0]
-        
-        book.jumlah += int(donation_amount)
-        donation = BukuDonasi(book=book, donator=name, donation_amount=donation_amount)
-
-        book.save()
-        donation.save()
-
-    return render(request, 'donasi_buku.html', {})
-
-@login_required(login_url='/login')
+@login_required(login_url='register:login')
 def donasi_buku_main(request):
     form = DonationForm(request.POST or None)
     donations = BukuDonasi.objects.filter(user=request.user)
@@ -55,7 +31,12 @@ def get_donations(request):
 
 def get_donations_by_book(request, title):
     title = title.replace("+", " ")
-    donations = BukuDonasi.objects.filter(title=title)
+    donations = BukuDonasi.objects.filter(user=request.user).filter(title__icontains=title)
+    return HttpResponse(serializers.serialize("json", donations), content_type="application/json")
+
+def get_donations_by_author(request, author):
+    author = author.replace("+", " ")
+    donations = BukuDonasi.objects.filter(user=request.user).filter(author__icontains=author)
     return HttpResponse(serializers.serialize("json", donations), content_type="application/json")
 
 @csrf_exempt
