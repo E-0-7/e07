@@ -1,3 +1,5 @@
+import json
+from django.http import JsonResponse
 from django.shortcuts import render
 from katalog_buku.models import Buku
 from .models import BukuDonasi
@@ -25,7 +27,9 @@ def donasi_buku_main(request):
 
     return render(request, 'main_donasi_buku.html', context)
 
+@csrf_exempt
 def get_donations(request):
+    print(request.user.pk)
     donations = BukuDonasi.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", donations), content_type="application/json")
 
@@ -65,3 +69,21 @@ def delete_donation_ajax(request, id):
         return HttpResponse("Deleted", status=201)
     return HttpResponseNotFound()
 
+@csrf_exempt
+def donate_book_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user = request.user
+        donator = request.user.username
+        donation_amount = data["donation_amount"]
+        title = data["title"]
+        author = data["author"]
+        year = data["year"]
+        image_url = data["image_url"]
+
+        donation = BukuDonasi(user=user, donator=donator, donation_amount=donation_amount, title=title, author=author, year=year, image_url=image_url)
+        donation.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
