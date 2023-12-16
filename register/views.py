@@ -92,3 +92,20 @@ def logout_flutter(request):
         "status": False,
         "message": "Logout gagal."
         }, status=401)
+
+@csrf_exempt
+def register_flutter(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    if not User.objects.filter(username=username).exists():
+        User.objects.create_user(username=username,
+                                 password=password)
+        return JsonResponse({
+            "status": True,
+            "message": "Register sukses!",
+        }, status=200)
+    else:
+        return JsonResponse({
+            "status": False,
+            "message": f"User dengan username {username} sudah ada"
+        })

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import login_user, logout_user, register, login_flutter, logout_flutter
+from .views import login_user, logout_user, register, login_flutter, logout_flutter, register_flutter
 from request_buku.views import status_request_buku
 from django.urls import path
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
     path('register/', register, name='register'),
+    path('register_flutter/', register_flutter, name='register_flutter'),
 ]
