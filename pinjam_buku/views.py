@@ -46,16 +46,20 @@ def display_pinjam_buku(request):
 
 def get_pinjam_data_ajax(request):
     user = request.user
-    pinjam_buku = PinjamBuku.objects.all()
     if user.is_authenticated:
-        if request.user == "pustakawan":
+        if request.user.username == "pustakawan":
             pinjam_buku = PinjamBuku.objects.all()
+        else:
+            pinjam_buku = PinjamBuku.objects.filter(user=user)
+    else:
+        return HttpResponse("User not authenticated", status=401)
+
     data = []
     
     for buku_dipinjam in pinjam_buku:
         buku = buku_dipinjam.buku
         buku_dict = model_to_dict(buku)
-        buku_dict['username'] = user.username
+        buku_dict['username'] = buku_dipinjam.user.username  # Use the actual user who borrowed the book
         buku_dict['durasi'] = buku_dipinjam.durasi
         buku_dict['nomor_telepon'] = buku_dipinjam.nomor_telepon
         buku_dict['alamat'] = buku_dipinjam.alamat
@@ -63,7 +67,6 @@ def get_pinjam_data_ajax(request):
         data.append(buku_dict)
     
     json_data = json.dumps(data)
-    
     return HttpResponse(json_data, content_type='application/json')
 
 @csrf_exempt
@@ -86,9 +89,7 @@ def create_pinjam_buku(request):
     if request.method == "POST":
         data = json.loads(request.body)
         buku_ambil = Buku.objects.get(pk=int(data["buku"]))
-        
-        # user, created = User.objects.get_or_create(username="john", defaults={"email": "lennon@thebeatles.com", "password": "johnpassword"})
-        
+                
         new_pinjam = PinjamBuku.objects.create(
             user = request.user,
             buku = buku_ambil,
