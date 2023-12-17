@@ -87,3 +87,13 @@ def donate_book_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def delete_book_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        donation = BukuDonasi.objects.get(pk=data['id'])
+        donation.delete()
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'error'}, status=401)
