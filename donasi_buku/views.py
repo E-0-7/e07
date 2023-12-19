@@ -1,3 +1,4 @@
+import functools
 import json
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -29,8 +30,11 @@ def donasi_buku_main(request):
 
 @csrf_exempt
 def get_donations(request):
-    print(request.user.pk)
-    donations = BukuDonasi.objects.filter(user=request.user)
+    if request.user.username == 'pustakawan':
+        donations = BukuDonasi.objects.all()
+    else:
+        donations = BukuDonasi.objects.filter(user=request.user)
+    donations = sorted(donations, key=functools.cmp_to_key(BukuDonasi.compare))
     return HttpResponse(serializers.serialize("json", donations), content_type="application/json")
 
 def get_donations_by_book(request, title):
@@ -94,6 +98,29 @@ def delete_book_flutter(request):
         data = json.loads(request.body)
         donation = BukuDonasi.objects.get(pk=data['id'])
         donation.delete()
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'error'}, status=401)
+
+@csrf_exempt
+def approve_book_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        donation = BukuDonasi.objects.get(pk=data['id'])
+        donation.status = "DITERIMA"
+        donation.save()
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'error'}, status=401)
+
+
+@csrf_exempt
+def reject_book_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        donation = BukuDonasi.objects.get(pk=data['id'])
+        donation.status = "DITOLAK"
+        donation.save()
         return JsonResponse({'status': 'success'}, status=200)
     else:
         return JsonResponse({'status': 'error'}, status=401)

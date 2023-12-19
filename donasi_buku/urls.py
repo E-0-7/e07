@@ -12,4 +12,6 @@ urlpatterns = [
     path('delete/<int:id>', delete_donation_ajax, name='delete_donation_ajax'),
     path('donate-flutter/', donate_book_flutter, name='donate_flutter'),
     path('delete-flutter/', delete_book_flutter, name='delete_flutter'),
+    path('approve-flutter/', approve_book_flutter, name='approve_book_flutter'),
+    path('reject-flutter/', reject_book_flutter, name='reject_book_flutter'),
 ]

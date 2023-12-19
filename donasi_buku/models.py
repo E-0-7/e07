@@ -13,3 +13,17 @@ class BukuDonasi(models.Model):
     year = models.IntegerField()
     image_url = models.URLField(null=True)
     status = models.CharField(max_length=15, default='PENDING', choices=[('PENDING', 'PENDING'), ('DITERIMA', 'DITERIMA'), ('DITOLAK', 'DITOLAK')])
+
+    @staticmethod
+    def compare(a: 'BukuDonasi', b: 'BukuDonasi') -> int:
+        if a.status == 'PENDING' and b.status != 'PENDING':
+            return -1
+        elif a.status != 'PENDING' and b.status == 'PENDING':
+            return 1
+        else:
+            if a.donation_date < b.donation_date:
+                return -1
+            elif a.donation_date > b.donation_date:
+                return 1
+            else:
+                return 0
