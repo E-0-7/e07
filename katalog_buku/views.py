@@ -1,5 +1,6 @@
+import json
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from .models import Buku
 from django.views.decorators.csrf import csrf_exempt
@@ -55,3 +56,26 @@ def add_product_ajax(request):
         return HttpResponse(b"CREATED", status=201)
     return HttpResponseNotFound()
 
+@csrf_exempt
+def add_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_product = Buku(
+            isbn=data['isbn'],
+            book_title=data['book_title'],
+            book_author=data['book_author'],
+            tahun_publikasi=int(data['tahun_publikasi']),
+            penerbit=data['penerbit'],
+            url_foto_kecil=data['url_foto_kecil'],
+            url_foto_medium=data['url_foto_medium'],
+            url_foto_large=data['url_foto_large'],
+            book_price=int(data['book_price']),
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
