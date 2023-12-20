@@ -91,20 +91,23 @@ def create_beli_buku(request):
     if request.method == "POST":
         data = json.loads(request.body)
         buku_ambil = Buku.objects.get(pk=int(data["buku"]))
-                
+
         beli_beli = BeliBuku.objects.create(
-            user = request.user,
-            buku = buku_ambil,
-            jumlah_buku = int(data["jumlah_buku"]),
-            nomor_telepon = int(data["nomor_telepon"]),
-            alamat = data["alamat"],
+            user=request.user,
+            buku=buku_ambil,
+            jumlah_buku=int(data["jumlah_buku"]),
+            nomor_telepon=int(data["nomor_telepon"]),
+            alamat=data["alamat"],
             metode_pembayaran=data["metode_pembayaran"]
         )
 
         beli_beli.save()
-        return JsonResponse({"status": "success"}, status=200)
+        response_data = {"status": "success"}
+
+        return JsonResponse(response_data, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+
 
 
 def get_beli_buku(request):
