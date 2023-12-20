@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import BeliBuku
 from .forms import BeliFormByID
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from katalog_buku.models import Buku
 from django.shortcuts import get_object_or_404
@@ -46,8 +46,12 @@ def get_beli_data_ajax(request):
     user = request.user
     beli_buku = BeliBuku.objects.filter(user=user)
     if user.is_authenticated:
-        if request.user == "pustakawan":
+        if request.user.username == "pustakawan":
             beli_buku = BeliBuku.objects.all()
+        else:
+            beli_buku = BeliBuku.objects.filter(user=user)
+    else:
+        return HttpResponse("User not authenticated", status=401)
     data = []
     
     for buku_dibeli in beli_buku:
@@ -80,3 +84,30 @@ def add_beli_buku_ajax(request, id):
 
         return HttpResponse("Created", status=201)
     return HttpResponse("Not Created", status=400)
+
+
+@csrf_exempt
+def create_beli_buku(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        buku_ambil = Buku.objects.get(pk=int(data["buku"]))
+                
+        beli_beli = BeliBuku.objects.create(
+            user = request.user,
+            buku = buku_ambil,
+            jumlah_buku = int(data["jumlah_buku"]),
+            nomor_telepon = int(data["nomor_telepon"]),
+            alamat = data["alamat"],
+            metode_pembayaran=data["metode_pembayaran"]
+        )
+
+        beli_beli.save()
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+
+def get_beli_buku(request):
+    beli_buku = BeliBuku.objects.all()
+
+    return HttpResponse(serializers.serialize('json', beli_buku), content_type='application/json')
