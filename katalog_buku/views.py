@@ -62,7 +62,7 @@ def add_product_flutter(request):
         
         data = json.loads(request.body)
 
-        new_product = Buku(
+        new_product = Buku.objects.create(
             isbn=data['isbn'],
             book_title=data['book_title'],
             book_author=data['book_author'],
