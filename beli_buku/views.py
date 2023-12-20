@@ -95,7 +95,7 @@ def create_beli_buku(request):
         beli_beli = BeliBuku.objects.create(
             user=request.user,
             buku=buku_ambil,
-            jumlah_buku=int(data["jumlah_buku"]),
+            jumlah_buku=int(data["jumlah"]),
             nomor_telepon=int(data["nomor_telepon"]),
             alamat=data["alamat"],
             metode_pembayaran=data["metode_pembayaran"]
